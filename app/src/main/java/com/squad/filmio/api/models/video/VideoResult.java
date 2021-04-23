@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Result implements Serializable {
+public class VideoResult implements Serializable {
     private float id;
     List<Video> results = new ArrayList<>();
 

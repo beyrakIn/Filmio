@@ -40,4 +40,22 @@ public class Discover implements Serializable {
     public void setTotal_results(float total_results) {
         this.total_results = total_results;
     }
+
+    public List<Movie> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Movie> results) {
+        this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "Discover{" +
+                "page=" + page +
+                ", results=" + results +
+                ", total_pages=" + total_pages +
+                ", total_results=" + total_results +
+                '}';
+    }
 }

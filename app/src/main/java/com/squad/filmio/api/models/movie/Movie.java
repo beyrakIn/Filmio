@@ -1,5 +1,7 @@
 package com.squad.filmio.api.models.movie;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 public class Movie implements Serializable {
     private boolean adult;
     private String backdrop_path;
-    private List<Integer> genre_ids = new ArrayList<>();
+    List<Integer> genre_ids = new ArrayList<>();
     private String belongs_to_collection = null;
     private float budget;
     List<Genre> genres = new ArrayList<>();
@@ -251,5 +253,37 @@ public class Movie implements Serializable {
 
     public boolean isVideo() {
         return video;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "adult=" + adult +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", genre_ids=" + genre_ids +
+                ", belongs_to_collection='" + belongs_to_collection + '\'' +
+                ", budget=" + budget +
+                ", genres=" + genres +
+                ", homepage='" + homepage + '\'' +
+                ", id=" + id +
+                ", imdb_id='" + imdb_id + '\'' +
+                ", original_language='" + original_language + '\'' +
+                ", original_title='" + original_title + '\'' +
+                ", overview='" + overview + '\'' +
+                ", popularity=" + popularity +
+                ", poster_path='" + poster_path + '\'' +
+                ", production_companies=" + production_companies +
+                ", production_countries=" + production_countries +
+                ", release_date='" + release_date + '\'' +
+                ", revenue=" + revenue +
+                ", runtime=" + runtime +
+                ", spoken_languages=" + spoken_languages +
+                ", status='" + status + '\'' +
+                ", tagline='" + tagline + '\'' +
+                ", title='" + title + '\'' +
+                ", video=" + video +
+                ", vote_average=" + vote_average +
+                ", vote_count=" + vote_count +
+                '}';
     }
 }
