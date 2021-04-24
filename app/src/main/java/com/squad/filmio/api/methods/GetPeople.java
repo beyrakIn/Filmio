@@ -3,6 +3,7 @@ package com.squad.filmio.api.methods;
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
 import com.squad.filmio.api.models.people.Person;
+import com.squad.filmio.api.models.people.PersonImage;
 import com.squad.filmio.api.models.people.PersonMovieCredits;
 import com.squad.filmio.api.models.people.PersonTvCredits;
 
@@ -26,5 +27,10 @@ public class GetPeople {
     public Call<PersonTvCredits> getPersonTvCredits() {
         appService = Config.retrofit.create(AppService.class);
         return appService.GET_PERSON_TV_CREDITS(4, "33321493d08eb4e1a46e6ce27d379eb0", "tr", "tr-TR");
+    }
+
+    public Call<PersonImage> getPersonImages() {
+        appService = Config.retrofit.create(AppService.class);
+        return appService.GET_PERSON_IMAGES(4, "33321493d08eb4e1a46e6ce27d379eb0", "tr", "tr-TR");
     }
 }

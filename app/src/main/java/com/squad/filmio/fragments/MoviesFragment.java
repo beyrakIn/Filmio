@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetPeople;
+import com.squad.filmio.api.models.people.PersonImage;
 import com.squad.filmio.api.models.people.PersonMovieCredits;
 import com.squad.filmio.api.models.people.PersonTvCredits;
 import com.squad.filmio.ui.CoverModel;
@@ -34,19 +35,15 @@ public class MoviesFragment extends Fragment {
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
 
         new Thread(() -> {
-            System.out.println("LOGIN");
-            new GetPeople().getPersonTvCredits().enqueue(new Callback<PersonTvCredits>() {
+            new GetPeople().getPersonImages().enqueue(new Callback<PersonImage>() {
                 @Override
-                public void onResponse(Call<PersonTvCredits> call, Response<PersonTvCredits> response) {
-                    if (response.isSuccessful()){
-                        System.out.println(response.body().getCast().get(1).getName());
-                    }
-                    System.out.println(response.code() + "FAIL 2");
+                public void onResponse(Call<PersonImage> call, Response<PersonImage> response) {
+                    System.out.println(response.body().getProfiles().get(1).getFile_path());
                 }
 
                 @Override
-                public void onFailure(Call<PersonTvCredits> call, Throwable t) {
-                    System.out.println(t.getMessage() + "FAIL 1");
+                public void onFailure(Call<PersonImage> call, Throwable t) {
+
                 }
             });
         }).start();

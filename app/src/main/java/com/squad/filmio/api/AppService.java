@@ -5,6 +5,7 @@ import com.squad.filmio.api.models.discover.ReviewResult;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.people.Person;
+import com.squad.filmio.api.models.people.PersonImage;
 import com.squad.filmio.api.models.people.PersonMovieCredits;
 import com.squad.filmio.api.models.people.PersonTvCredits;
 import com.squad.filmio.api.models.translation.TranslationResult;
@@ -165,6 +166,22 @@ public interface AppService {
 
     @GET("person/{person_id}/tv_credits")
     Call<PersonTvCredits> GET_PERSON_TV_CREDITS(
+            @Path("person_id") int person_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+//    @GET("person/{person_id}/tv_credits")
+//    Call<PersonTvCredits> GET_PERSON_COMBINED_CREDITS(
+//            @Path("person_id") int person_id,
+//            @Query("api_key") String api_key,
+//            @Query("language") String language,
+//            @Query("include_image_language") String image_language
+//    );
+
+    @GET("person/{person_id}/images")
+    Call<PersonImage> GET_PERSON_IMAGES(
             @Path("person_id") int person_id,
             @Query("api_key") String api_key,
             @Query("language") String language,
