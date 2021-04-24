@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary">
 
     <RelativeLayout
@@ -28,7 +30,10 @@
                 android:lines="1"
                 android:text="Group title"
                 android:textColor="@color/colorWhite"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/view_all" />
 
             <Button
                 android:id="@+id/view_all"
@@ -43,7 +48,8 @@
                 android:text="View All"
                 android:textColor="@color/colorAccent"
                 android:textSize="13dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 
@@ -51,8 +57,13 @@
             android:id="@+id/group_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/simple_item"
+            tools:itemCount="20"
             android:layout_below="@+id/head_parent"
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
 

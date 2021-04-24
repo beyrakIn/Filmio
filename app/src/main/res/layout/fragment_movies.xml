@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".fragments.MoviesFragment">
 
@@ -15,10 +15,5 @@
         android:foregroundGravity="center"
         android:overScrollMode="never" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/movies"
-        android:textSize="40dp"
-        android:src="@drawable/cover" />
+    <include layout="@layout/group_item"/>
 </LinearLayout>

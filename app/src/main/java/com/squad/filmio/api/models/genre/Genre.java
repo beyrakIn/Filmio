@@ -1,15 +1,15 @@
-package com.squad.filmio.api.models.movie;
+package com.squad.filmio.api.models.genre;
 
 import java.io.Serializable;
 
 public class Genre implements Serializable {
-    private float id;
+    private int id;
     private String name;
 
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -19,11 +19,19 @@ public class Genre implements Serializable {
 
     // Setter Methods
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

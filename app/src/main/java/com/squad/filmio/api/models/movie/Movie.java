@@ -1,6 +1,6 @@
 package com.squad.filmio.api.models.movie;
 
-import com.google.gson.annotations.SerializedName;
+import com.squad.filmio.api.models.genre.Genre;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Movie implements Serializable {
     private float budget;
     List<Genre> genres = new ArrayList<>();
     private String homepage;
-    private float id;
+    private int id;
     private String imdb_id;
     private String original_language;
     private String original_title;
@@ -57,7 +57,7 @@ public class Movie implements Serializable {
         return homepage;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -143,7 +143,7 @@ public class Movie implements Serializable {
         this.homepage = homepage;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

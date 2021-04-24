@@ -4,19 +4,16 @@ import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
 import com.squad.filmio.api.models.discover.Discover;
 
-import java.util.List;
-
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class GetMovies {
     AppService appService;
 
     private final String KEY = "33321493d08eb4e1a46e6ce27d379eb0";
+
     public Call<Discover> getPopularMovies() {
         appService = Config.retrofit.create(AppService.class);
-        return appService.GET_POPULAR_MOVIES("33321493d08eb4e1a46e6ce27d379eb0", 1);
+        return appService.GET_POPULAR_MOVIES("33321493d08eb4e1a46e6ce27d379eb0", 1, "tr", "tr-TR");
     }
 
 }
