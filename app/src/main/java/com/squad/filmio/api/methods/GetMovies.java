@@ -2,7 +2,7 @@ package com.squad.filmio.api.methods;
 
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
-import com.squad.filmio.api.models.discover.Discover;
+import com.squad.filmio.api.models.search.MovieResponse;
 
 import retrofit2.Call;
 
@@ -11,9 +11,14 @@ public class GetMovies {
 
     private final String KEY = "33321493d08eb4e1a46e6ce27d379eb0";
 
-    public Call<Discover> getPopularMovies() {
+    public Call<MovieResponse> getPopularMovies() {
         appService = Config.retrofit.create(AppService.class);
-        return appService.GET_POPULAR_MOVIES("33321493d08eb4e1a46e6ce27d379eb0", 1, "tr", "tr-TR");
+        return appService.GET_POPULAR_MOVIES(KEY, 1, "tr", "tr-TR");
+    }
+
+    public Call<MovieResponse> getUpcomingMovies() {
+        appService = Config.retrofit.create(AppService.class);
+        return appService.GET_POPULAR_MOVIES(KEY, 1, "tr", "tr-TR");
     }
 
 }

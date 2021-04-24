@@ -15,4 +15,9 @@ public class GetTv {
         appService = Config.retrofit.create(AppService.class);
         return appService.GET_POPULAR_TV( KEY,1, "tr", "tr-TR");
     }
+
+    public Call<TvResponse> getTopRatedTv() {
+        appService = Config.retrofit.create(AppService.class);
+        return appService.GET_TOP_RATED_TV( KEY,1, "tr", "tr-TR");
+    }
 }

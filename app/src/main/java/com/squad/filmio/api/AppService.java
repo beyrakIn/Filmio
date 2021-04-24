@@ -1,6 +1,5 @@
 package com.squad.filmio.api;
 
-import com.squad.filmio.api.models.discover.Discover;
 import com.squad.filmio.api.models.discover.ReviewResult;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
@@ -42,7 +41,7 @@ public interface AppService {
     );
 
     @GET("movie/{movie_id}/recommendations")
-    Call<Discover> GET_RECOMMENDATIONS_MOVIES(
+    Call<MovieResponse> GET_RECOMMENDATIONS_MOVIES(
             @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
             @Query("language") String language,
@@ -58,7 +57,7 @@ public interface AppService {
     );
 
     @GET("movie/{movie_id}/similar")
-    Call<Discover> GET_SIMILAR_MOVIES(
+    Call<MovieResponse> GET_SIMILAR_MOVIES(
             @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
             @Query("language") String language,
@@ -74,7 +73,7 @@ public interface AppService {
     );
 
     @GET("movie/top_rated")
-    Call<Discover> GET_TOP_RELATED_MOVIES(
+    Call<MovieResponse> GET_TOP_RELATED_MOVIES(
             @Query("api_key") String api_key,
             @Query("page") int page,
             @Query("language") String language,
@@ -83,7 +82,7 @@ public interface AppService {
 
 
     @GET("movie/popular")
-    Call<Discover> GET_POPULAR_MOVIES(
+    Call<MovieResponse> GET_POPULAR_MOVIES(
             @Query("api_key") String api_key,
             @Query("page") int page,
             @Query("language") String language,
@@ -105,7 +104,7 @@ public interface AppService {
      */
 
     @GET("discover/movie")
-    Call<Discover> GET_MOVIE_DISCOVER(
+    Call<MovieResponse> GET_MOVIE_DISCOVER(
             @Query("api_key") String api_key,
             @Query("page") int page,
             @Query("language") String language,
@@ -114,7 +113,7 @@ public interface AppService {
     );
 
     @GET("discover/tv")
-    Call<Discover> GET_TV_DISCOVER(
+    Call<MovieResponse> GET_TV_DISCOVER(
             @Query("api_key") String api_key,
             @Query("page") int page,
             @Query("language") String language,
@@ -201,7 +200,8 @@ public interface AppService {
 //    );
 
     /**
-     * TV*/
+     * TV
+     */
 
     @GET("tv/popular")
     Call<TvResponse> GET_POPULAR_TV(
@@ -211,7 +211,13 @@ public interface AppService {
             @Query("include_image_language") String image_language
     );
 
-
+    @GET("tv/top_rated")
+    Call<TvResponse> GET_TOP_RATED_TV(
+            @Query("api_key") String api_key,
+            @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
 
 
     /**
@@ -251,4 +257,15 @@ public interface AppService {
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );
+
+    /**
+     * UPCOMING*/
+
+    @GET("movie/upcoming")
+    Call<MovieResponse> UPCOMING_MOVIE(
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
 }

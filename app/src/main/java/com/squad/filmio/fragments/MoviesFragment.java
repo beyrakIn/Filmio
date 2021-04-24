@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
+import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.methods.GetTv;
+import com.squad.filmio.api.models.search.MovieResponse;
 import com.squad.filmio.api.models.search.TvResponse;
 import com.squad.filmio.ui.CoverModel;
 import com.squad.filmio.ui.adapters.CoverAdapter;
@@ -33,14 +35,14 @@ public class MoviesFragment extends Fragment {
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
 
         new Thread(() -> {
-            new GetTv().getPopularTv().enqueue(new Callback<TvResponse>() {
+            new GetMovies().getUpcomingMovies().enqueue(new Callback<MovieResponse>() {
                 @Override
-                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
-                    System.out.println(response.body().getResults());
+                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+//                    System.out.println(response.body().getResults());
                 }
 
                 @Override
-                public void onFailure(Call<TvResponse> call, Throwable t) {
+                public void onFailure(Call<MovieResponse> call, Throwable t) {
 
                 }
             });
