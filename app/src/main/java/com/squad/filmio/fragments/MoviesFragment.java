@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
-import com.squad.filmio.api.methods.GetPeople;
-import com.squad.filmio.api.models.people.PersonImage;
-import com.squad.filmio.api.models.people.PersonMovieCredits;
-import com.squad.filmio.api.models.people.PersonTvCredits;
+import com.squad.filmio.api.methods.GetTv;
+import com.squad.filmio.api.models.search.TvResponse;
 import com.squad.filmio.ui.CoverModel;
 import com.squad.filmio.ui.adapters.CoverAdapter;
 
@@ -35,14 +33,14 @@ public class MoviesFragment extends Fragment {
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
 
         new Thread(() -> {
-            new GetPeople().getPersonImages().enqueue(new Callback<PersonImage>() {
+            new GetTv().getPopularTv().enqueue(new Callback<TvResponse>() {
                 @Override
-                public void onResponse(Call<PersonImage> call, Response<PersonImage> response) {
-                    System.out.println(response.body().getProfiles().get(1).getFile_path());
+                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                    System.out.println(response.body().getResults());
                 }
 
                 @Override
-                public void onFailure(Call<PersonImage> call, Throwable t) {
+                public void onFailure(Call<TvResponse> call, Throwable t) {
 
                 }
             });

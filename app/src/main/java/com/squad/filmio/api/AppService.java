@@ -8,7 +8,10 @@ import com.squad.filmio.api.models.people.Person;
 import com.squad.filmio.api.models.people.PersonImage;
 import com.squad.filmio.api.models.people.PersonMovieCredits;
 import com.squad.filmio.api.models.people.PersonTvCredits;
-import com.squad.filmio.api.models.translation.TranslationResult;
+import com.squad.filmio.api.models.search.CompanyResponse;
+import com.squad.filmio.api.models.search.MovieResponse;
+import com.squad.filmio.api.models.search.TvResponse;
+import com.squad.filmio.api.models.translation.TranslationResponse;
 import com.squad.filmio.api.models.video.VideoResult;
 
 import retrofit2.Call;
@@ -63,7 +66,7 @@ public interface AppService {
     );
 
     @GET("movie/{movie_id}/translations")
-    Call<TranslationResult> GET_TRANSLATIONS(
+    Call<TranslationResponse> GET_TRANSLATIONS(
             @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
             @Query("language") String language,
@@ -87,14 +90,6 @@ public interface AppService {
             @Query("include_image_language") String image_language
     );
 
-    @GET("search/movie")
-    Call<Discover> SEARCH_MOVIE(
-            @Query("api_key") String api_key,
-            @Query("query") String query,
-            @Query("page") int page,
-            @Query("language") String language,
-            @Query("include_image_language") String image_language
-    );
 
     @GET("search/person")
     Call<Person> SEARCH_PERSON(
@@ -144,7 +139,8 @@ public interface AppService {
     );
 
     /**
-     * People*/
+     * People
+     */
 
 
     @GET("person/{person_id}")
@@ -184,6 +180,74 @@ public interface AppService {
     Call<PersonImage> GET_PERSON_IMAGES(
             @Path("person_id") int person_id,
             @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+    @GET("person/{person_id}/images")
+    Call<TranslationResponse> GET_PERSON_TRANSLATIONS(
+            @Path("person_id") int person_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+//    @GET("person/popular")
+//    Call<Discover> GET_PERSON_POPULAR(
+//            @Path("person_id") int person_id,
+//            @Query("api_key") String api_key,
+//            @Query("language") String language,
+//            @Query("include_image_language") String image_language
+//    );
+
+    /**
+     * TV*/
+
+    @GET("tv/popular")
+    Call<TvResponse> GET_POPULAR_TV(
+            @Query("api_key") String api_key,
+            @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+
+
+
+    /**
+     * Search
+     */
+
+    @GET("search/movie")
+    Call<MovieResponse> SEARCH_MOVIE(
+            @Query("api_key") String api_key,
+            @Query("query") String query,
+            @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+    @GET("search/tv")
+    Call<TvResponse> SEARCH_TV_SHOWS(
+            @Query("api_key") String api_key,
+            @Query("query") String query,
+            @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+//    @GET("search/person")
+//    Call<SearchCompany> SEARCH_PERSON(
+//            @Query("api_key") String api_key,
+//            @Query("query") String query,
+//            @Query("language") String language,
+//            @Query("include_image_language") String image_language
+//    );
+
+    @GET("person/popular")
+    Call<CompanyResponse> SEARCH_COMPANY(
+            @Query("api_key") String api_key,
+            @Query("query") String query,
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );

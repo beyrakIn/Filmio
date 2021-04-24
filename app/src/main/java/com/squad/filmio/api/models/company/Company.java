@@ -1,17 +1,17 @@
-package com.squad.filmio.api.models.movie;
+package com.squad.filmio.api.models.company;
 
 import java.io.Serializable;
 
 public class Company implements Serializable {
-    private float id;
-    private String logo_path;
+    private int id;
+    private String logo_path = null;
     private String name;
     private String origin_country;
 
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -29,7 +29,7 @@ public class Company implements Serializable {
 
     // Setter Methods
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,5 +43,15 @@ public class Company implements Serializable {
 
     public void setOrigin_country(String origin_country) {
         this.origin_country = origin_country;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", logo_path='" + logo_path + '\'' +
+                ", name='" + name + '\'' +
+                ", origin_country='" + origin_country + '\'' +
+                '}';
     }
 }

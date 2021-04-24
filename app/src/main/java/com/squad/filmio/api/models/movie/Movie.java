@@ -1,6 +1,7 @@
 package com.squad.filmio.api.models.movie;
 
 import com.squad.filmio.api.models.genre.Genre;
+import com.squad.filmio.api.models.company.Company;
 
 import java.io.Serializable;
 import java.util.ArrayList;

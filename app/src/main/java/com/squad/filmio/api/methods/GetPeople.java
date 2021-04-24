@@ -6,6 +6,7 @@ import com.squad.filmio.api.models.people.Person;
 import com.squad.filmio.api.models.people.PersonImage;
 import com.squad.filmio.api.models.people.PersonMovieCredits;
 import com.squad.filmio.api.models.people.PersonTvCredits;
+import com.squad.filmio.api.models.translation.TranslationResponse;
 
 import retrofit2.Call;
 
@@ -32,5 +33,10 @@ public class GetPeople {
     public Call<PersonImage> getPersonImages() {
         appService = Config.retrofit.create(AppService.class);
         return appService.GET_PERSON_IMAGES(4, "33321493d08eb4e1a46e6ce27d379eb0", "tr", "tr-TR");
+    }
+
+    public Call<TranslationResponse> getPersonTranslation() {
+        appService = Config.retrofit.create(AppService.class);
+        return appService.GET_PERSON_TRANSLATIONS(4, "33321493d08eb4e1a46e6ce27d379eb0", "tr", "tr-TR");
     }
 }
