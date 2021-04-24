@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import com.squad.filmio.R;
 
-public class NotificationsFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View root = inflater.inflate(R.layout.fragment_search, container, false);
 
         return root;
     }
