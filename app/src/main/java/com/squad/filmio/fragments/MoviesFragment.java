@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
@@ -18,7 +19,6 @@ import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.search.MovieResponse;
-import com.squad.filmio.ui.CoverModel;
 import com.squad.filmio.ui.adapters.CoverAdapter;
 
 import java.util.ArrayList;
@@ -58,6 +58,9 @@ public class MoviesFragment extends Fragment {
                         for (Genre genre : response.body().getGenres()) {
                             group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                             TextView title = group.findViewById(R.id.group_title);
+                            title.setOnClickListener(v ->{
+//                                Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_viewAllFragment);
+                            });
                             title.setText(genre.getName());
                             mainLinear.addView(group);
                         }
