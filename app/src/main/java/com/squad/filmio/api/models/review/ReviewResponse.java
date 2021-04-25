@@ -1,11 +1,9 @@
-package com.squad.filmio.api.models.discover;
-
-import com.squad.filmio.api.models.movie.Review;
+package com.squad.filmio.api.models.review;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ReviewResult implements Serializable {
+public class ReviewResponse implements Serializable {
     private int total_results;
     private int total_pages;
     private List<Review> results;

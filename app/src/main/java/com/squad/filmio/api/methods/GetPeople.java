@@ -2,10 +2,10 @@ package com.squad.filmio.api.methods;
 
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
-import com.squad.filmio.api.models.people.Person;
-import com.squad.filmio.api.models.people.PersonImage;
-import com.squad.filmio.api.models.people.PersonMovieCredits;
-import com.squad.filmio.api.models.people.PersonTvCredits;
+import com.squad.filmio.api.models.person.Person;
+import com.squad.filmio.api.models.person.PersonImage;
+import com.squad.filmio.api.models.person.PersonMovieCredits;
+import com.squad.filmio.api.models.person.PersonTvCredits;
 import com.squad.filmio.api.models.translation.TranslationResponse;
 
 import retrofit2.Call;

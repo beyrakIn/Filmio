@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
@@ -18,7 +17,7 @@ import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
-import com.squad.filmio.api.models.search.MovieResponse;
+import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.ui.adapters.CoverAdapter;
 
 import java.util.ArrayList;

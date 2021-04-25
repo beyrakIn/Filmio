@@ -1,6 +1,4 @@
-package com.squad.filmio.api.models.people;
-
-import com.squad.filmio.api.models.movie.Movie;
+package com.squad.filmio.api.models.person;
 
 import java.io.Serializable;
 import java.util.ArrayList;

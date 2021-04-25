@@ -2,7 +2,7 @@ package com.squad.filmio.api.methods;
 
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
-import com.squad.filmio.api.models.search.MovieResponse;
+import com.squad.filmio.api.models.movie.MovieResponse;
 
 import java.util.Locale;
 

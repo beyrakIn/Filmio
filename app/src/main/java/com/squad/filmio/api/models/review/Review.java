@@ -1,4 +1,6 @@
-package com.squad.filmio.api.models.movie;
+package com.squad.filmio.api.models.review;
+
+import com.squad.filmio.api.models.movie.Author;
 
 import java.io.Serializable;
 

@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.models.movie.Movie;
-import com.squad.filmio.views.VerticalItem;
+import com.squad.filmio.ui.views.VerticalItem;
 
 import java.util.List;
 

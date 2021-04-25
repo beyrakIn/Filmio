@@ -1,14 +1,14 @@
-package com.squad.filmio.api.models.search;
+package com.squad.filmio.api.models.company;
 
-import com.squad.filmio.api.models.movie.Movie;
+import com.squad.filmio.api.models.company.Company;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieResponse implements Serializable {
+public class CompanyResponse implements Serializable {
     private int page;
-    List<Movie> results = new ArrayList<>();
+    List<Company> results = new ArrayList<>();
     private int total_pages;
     private int total_results;
 
@@ -20,11 +20,11 @@ public class MovieResponse implements Serializable {
         this.page = page;
     }
 
-    public List<Movie> getResults() {
+    public List<Company> getResults() {
         return results;
     }
 
-    public void setResults(List<Movie> results) {
+    public void setResults(List<Company> results) {
         this.results = results;
     }
 
@@ -46,7 +46,7 @@ public class MovieResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "SearchMovie{" +
+        return "SearchResponse{" +
                 "page=" + page +
                 ", results=" + results +
                 ", total_pages=" + total_pages +

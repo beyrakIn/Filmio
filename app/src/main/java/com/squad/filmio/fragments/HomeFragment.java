@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.models.movie.Movie;
-import com.squad.filmio.api.models.search.MovieResponse;
+import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.ui.adapters.UpcomingAdapter;
 
 import java.util.ArrayList;

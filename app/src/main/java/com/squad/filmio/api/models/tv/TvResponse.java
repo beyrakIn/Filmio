@@ -1,4 +1,4 @@
-package com.squad.filmio.api.models.search;
+package com.squad.filmio.api.models.tv;
 
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.tv.Tv;

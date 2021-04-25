@@ -1,4 +1,4 @@
-package com.squad.filmio.api.models.people;
+package com.squad.filmio.api.models.person;
 
 import java.util.ArrayList;
 import java.util.List;

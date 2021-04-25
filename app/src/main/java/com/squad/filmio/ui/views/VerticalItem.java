@@ -1,4 +1,4 @@
-package com.squad.filmio.views;
+package com.squad.filmio.ui.views;
 
 import android.view.View;
 import android.widget.ImageView;

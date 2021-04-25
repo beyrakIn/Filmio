@@ -2,9 +2,9 @@ package com.squad.filmio.api.methods;
 
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
-import com.squad.filmio.api.models.search.CompanyResponse;
-import com.squad.filmio.api.models.search.MovieResponse;
-import com.squad.filmio.api.models.search.TvResponse;
+import com.squad.filmio.api.models.company.CompanyResponse;
+import com.squad.filmio.api.models.movie.MovieResponse;
+import com.squad.filmio.api.models.tv.TvResponse;
 
 import retrofit2.Call;
 

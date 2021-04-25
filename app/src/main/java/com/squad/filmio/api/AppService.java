@@ -1,18 +1,18 @@
 package com.squad.filmio.api;
 
-import com.squad.filmio.api.models.discover.ReviewResult;
+import com.squad.filmio.api.models.review.ReviewResponse;
 import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
-import com.squad.filmio.api.models.people.Person;
-import com.squad.filmio.api.models.people.PersonImage;
-import com.squad.filmio.api.models.people.PersonMovieCredits;
-import com.squad.filmio.api.models.people.PersonTvCredits;
-import com.squad.filmio.api.models.search.CompanyResponse;
-import com.squad.filmio.api.models.search.MovieResponse;
-import com.squad.filmio.api.models.search.TvResponse;
+import com.squad.filmio.api.models.person.Person;
+import com.squad.filmio.api.models.person.PersonImage;
+import com.squad.filmio.api.models.person.PersonMovieCredits;
+import com.squad.filmio.api.models.person.PersonTvCredits;
+import com.squad.filmio.api.models.company.CompanyResponse;
+import com.squad.filmio.api.models.movie.MovieResponse;
+import com.squad.filmio.api.models.tv.TvResponse;
 import com.squad.filmio.api.models.translation.TranslationResponse;
-import com.squad.filmio.api.models.video.VideoResult;
+import com.squad.filmio.api.models.video.VideoResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -34,7 +34,7 @@ public interface AppService {
     );
 
     @GET("movie/{movie_id}/videos")
-    Call<VideoResult> GET_MOVIE_VIDEOS(
+    Call<VideoResponse> GET_MOVIE_VIDEOS(
             @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
             @Query("language") String language,
@@ -50,7 +50,7 @@ public interface AppService {
     );
 
     @GET("movie/{movie_id}/reviews")
-    Call<ReviewResult> GET_MOVIE_REVIEWS(
+    Call<ReviewResponse> GET_MOVIE_REVIEWS(
             @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
             @Query("language") String language,

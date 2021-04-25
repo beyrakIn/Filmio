@@ -1,10 +1,10 @@
-package com.squad.filmio.api.models.people;
+package com.squad.filmio.api.models.person;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrewMovie implements Serializable {
+public class CastMovie implements Serializable {
     private boolean adult;
     private String backdrop_path;
     List<Integer> genre_ids = new ArrayList<>();
@@ -19,9 +19,9 @@ public class CrewMovie implements Serializable {
     private float vote_average;
     private float vote_count;
     private float popularity;
+    private String character;
     private String credit_id;
-    private String department;
-    private String job;
+    private float order;
 
 
     // Getter Methods
@@ -78,16 +78,16 @@ public class CrewMovie implements Serializable {
         return popularity;
     }
 
+    public String getCharacter() {
+        return character;
+    }
+
     public String getCredit_id() {
         return credit_id;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getJob() {
-        return job;
+    public float getOrder() {
+        return order;
     }
 
     // Setter Methods
@@ -144,16 +144,16 @@ public class CrewMovie implements Serializable {
         this.popularity = popularity;
     }
 
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
     public void setCredit_id(String credit_id) {
         this.credit_id = credit_id;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
+    public void setOrder(float order) {
+        this.order = order;
     }
 
     public boolean isAdult() {
@@ -174,7 +174,7 @@ public class CrewMovie implements Serializable {
 
     @Override
     public String toString() {
-        return "CrewMovie{" +
+        return "CastMovie{" +
                 "adult=" + adult +
                 ", backdrop_path='" + backdrop_path + '\'' +
                 ", genre_ids=" + genre_ids +
@@ -189,9 +189,9 @@ public class CrewMovie implements Serializable {
                 ", vote_average=" + vote_average +
                 ", vote_count=" + vote_count +
                 ", popularity=" + popularity +
+                ", character='" + character + '\'' +
                 ", credit_id='" + credit_id + '\'' +
-                ", department='" + department + '\'' +
-                ", job='" + job + '\'' +
+                ", order=" + order +
                 '}';
     }
 }
