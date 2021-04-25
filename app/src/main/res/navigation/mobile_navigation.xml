@@ -41,10 +41,19 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.squad.filmio.fragments.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details" >
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewAllFragment"
         android:name="com.squad.filmio.fragments.ViewAllFragment"
         android:label="fragment_view_all"
         tools:layout="@layout/fragment_view_all" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.squad.filmio.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person" />
 </navigation>
