@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -71,14 +72,13 @@ public class HomeFragment extends Fragment {
                         assert movieResponse != null;
                         movies = movieResponse.getResults();
                         adapter.updateData(movies);
-
-//                        adapter.notifyDataSetChanged();
                         pageCount++;
                     }
                 }
 
                 @Override
                 public void onFailure(Call<MovieResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     loadData(pageCount);
                 }
             });
