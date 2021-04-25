@@ -1,7 +1,6 @@
 package com.squad.filmio.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +24,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-    View root;
-    List<Movie> movies = new ArrayList<>();
-    RecyclerView recyclerView;
-    int pageCount = 1;
+    private View root;
+    private List<Movie> movies = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private int pageCount = 1;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,14 +47,10 @@ public class HomeFragment extends Fragment {
     private void initScroll() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
+            public void onScrollStateChanged(RecyclerView recyclerView2, int newState) {
+                super.onScrollStateChanged(recyclerView2, newState);
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    try {
-                        loadData(pageCount);
-                    } catch (Exception e) {
-                        Log.e("scroll", e.getMessage());
-                    }
+                    loadData(pageCount);
                 }
             }
         });
@@ -81,6 +76,7 @@ public class HomeFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<MovieResponse> call, Throwable t) {
+                    loadData(pageCount);
                 }
             });
         }).start();

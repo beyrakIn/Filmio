@@ -219,6 +219,14 @@ public interface AppService {
             @Query("include_image_language") String image_language
     );
 
+    @GET("tv/{tv_id}/recommendations")
+    Call<TvResponse> GET_RECOMMENDATIONS_TV(
+            @Query("api_key") String api_key,
+            @Path("tv_id") int tv_id,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
 
     /**
      * Search

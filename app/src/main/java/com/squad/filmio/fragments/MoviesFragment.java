@@ -4,55 +4,68 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
-import com.squad.filmio.api.methods.GetMovies;
-import com.squad.filmio.api.methods.GetTv;
-import com.squad.filmio.api.models.search.MovieResponse;
-import com.squad.filmio.api.models.search.TvResponse;
+import com.squad.filmio.api.methods.GetGenres;
+import com.squad.filmio.api.models.genre.Genre;
+import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.ui.CoverModel;
 import com.squad.filmio.ui.adapters.CoverAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MoviesFragment extends Fragment {
+    private View root, group;
     private ViewPager coverViewPager;
+    private LinearLayout mainLinear;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_movies, container, false);
+        root = inflater.inflate(R.layout.fragment_movies, container, false);
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
+        mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
 
 
+        loadGenres();
+
+        initViewPager();
+        return root;
+    }
+
+    private void loadGenres() {
         new Thread(() -> {
-            new GetMovies().getUpcomingMovies(1).enqueue(new Callback<MovieResponse>() {
+            new GetGenres().getMoviesGenres().enqueue(new Callback<GenreResponse>() {
                 @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-//                    System.out.println(response.body().getResults());
+                public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
+                    if (response.isSuccessful()) {
+                        for (Genre genre : response.body().getGenres()) {
+                            group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+                            TextView title = group.findViewById(R.id.group_title);
+                            title.setText(genre.getName());
+                            mainLinear.addView(group);
+                        }
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
+                public void onFailure(Call<GenreResponse> call, Throwable t) {
 
                 }
             });
         }).start();
-
-
-        initViewPager();
-        return root;
     }
 
     private void initViewPager() {

@@ -7,13 +7,25 @@
     android:orientation="vertical"
     tools:context=".fragments.MoviesFragment">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/movies_fragment_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:clipToPadding="false"
-        android:foregroundGravity="center"
-        android:overScrollMode="never" />
 
-    <include layout="@layout/group_item"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/movies_fragment_main_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/movies_fragment_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:clipToPadding="false"
+                android:foregroundGravity="center"
+                android:overScrollMode="never" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
