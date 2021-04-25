@@ -5,31 +5,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.squad.filmio.Constants;
 import com.squad.filmio.R;
-import com.squad.filmio.ui.CoverModel;
+import com.squad.filmio.api.models.movie.Movie;
 
 import java.util.List;
 
 public class CoverAdapter extends PagerAdapter {
-
-    private List<CoverModel> models;
+    private List<Movie> models;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public CoverAdapter(List<CoverModel> models, Context context) {
+    public CoverAdapter(List<Movie> models, Context context) {
         this.models = models;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return models.size();
     }
 
     @Override
@@ -41,13 +41,17 @@ public class CoverAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         layoutInflater = LayoutInflater.from(context);
+        Movie movie = models.get(position);
         View view = layoutInflater.inflate(R.layout.cover_item, container, false);
         ImageView coverPictures;
 
         coverPictures = view.findViewById(R.id.item_cover_picture);
+        Glide.with(context)
+                .load(Constants.SRC + movie.getBackdrop_path())
+                .into(coverPictures);
 
-        view.setOnClickListener(v -> {
-
+        coverPictures.setOnClickListener(v -> {
+            Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
         });
 
         container.addView(view, 0);
@@ -56,6 +60,6 @@ public class CoverAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 }

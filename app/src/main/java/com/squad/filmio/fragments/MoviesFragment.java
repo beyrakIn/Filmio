@@ -13,8 +13,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetGenres;
+import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
+import com.squad.filmio.api.models.movie.Movie;
+import com.squad.filmio.api.models.search.MovieResponse;
 import com.squad.filmio.ui.CoverModel;
 import com.squad.filmio.ui.adapters.CoverAdapter;
 
@@ -51,6 +54,7 @@ public class MoviesFragment extends Fragment {
                 @Override
                 public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
                     if (response.isSuccessful()) {
+                        assert response.body() != null;
                         for (Genre genre : response.body().getGenres()) {
                             group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                             TextView title = group.findViewById(R.id.group_title);
@@ -69,10 +73,27 @@ public class MoviesFragment extends Fragment {
     }
 
     private void initViewPager() {
-        List<CoverModel> coverModels = new ArrayList<>();
-        CoverAdapter coverAdapter = new CoverAdapter(coverModels, getContext());
-        coverViewPager.setAdapter(coverAdapter);
-        coverViewPager.setPadding(120, 10, 120, 0);
-        coverViewPager.setCurrentItem(1);
+        List<Movie> movies = new ArrayList<>();
+
+        new Thread(()->{
+            new GetMovies().getPopularMovies().enqueue(new Callback<MovieResponse>() {
+                @Override
+                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                    if (response.isSuccessful()){
+                        assert response.body() != null;
+                        movies.addAll(response.body().getResults());
+                        CoverAdapter coverAdapter = new CoverAdapter(movies, getContext());
+                        coverViewPager.setAdapter(coverAdapter);
+                        coverViewPager.setPadding(120, 10, 120, 0);
+                        coverViewPager.setCurrentItem(1);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MovieResponse> call, Throwable t) {
+
+                }
+            });
+        }).start();
     }
 }

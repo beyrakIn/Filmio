@@ -1,11 +1,13 @@
 package com.squad.filmio.api;
 
+import com.squad.filmio.Constants;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Config {
     public static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(Constants.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 }

@@ -1,6 +1,7 @@
 package com.squad.filmio.api;
 
 import com.squad.filmio.api.models.discover.ReviewResult;
+import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.people.Person;
@@ -136,6 +137,23 @@ public interface AppService {
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );
+
+    @GET("genre/{genre_id}")
+    Call<Genre> GET_MOVIE_GENRE(
+            @Path("genre_id") int genre_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+//    @GET("genre/{genre_id}")
+//    Call<Genre> GET_TV_GENRE(
+//            @Path("genre_id") int genre_id,
+//            @Query("api_key") String api_key,
+//            @Query("language") String language,
+//            @Query("include_image_language") String image_language
+//    );
+
 
     /**
      * People
