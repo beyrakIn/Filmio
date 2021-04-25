@@ -23,6 +23,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<VerticalItem> {
     public UpcomingAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
+        notifyDataSetChanged();
     }
 
     @NonNull

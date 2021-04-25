@@ -4,21 +4,25 @@ import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
 import com.squad.filmio.api.models.search.MovieResponse;
 
+import java.util.Locale;
+
 import retrofit2.Call;
 
 public class GetMovies {
     AppService appService;
 
+    Locale locale = Locale.getDefault();
     private final String KEY = "33321493d08eb4e1a46e6ce27d379eb0";
+    private final String LANG = locale.getLanguage();
 
     public Call<MovieResponse> getPopularMovies() {
         appService = Config.retrofit.create(AppService.class);
         return appService.GET_POPULAR_MOVIES(KEY, 1, "tr", "tr-TR");
     }
 
-    public Call<MovieResponse> getUpcomingMovies() {
+    public Call<MovieResponse> getUpcomingMovies(int page) {
         appService = Config.retrofit.create(AppService.class);
-        return appService.GET_POPULAR_MOVIES(KEY, 1, "tr", "tr-TR");
+        return appService.GET_UPCOMING_MOVIE(KEY, page, LANG, LANG);
     }
 
 }

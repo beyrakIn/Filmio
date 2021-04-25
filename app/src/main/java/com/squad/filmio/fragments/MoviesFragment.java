@@ -19,6 +19,7 @@ import com.squad.filmio.ui.adapters.CoverAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +35,9 @@ public class MoviesFragment extends Fragment {
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
 
+
         new Thread(() -> {
-            new GetMovies().getUpcomingMovies().enqueue(new Callback<MovieResponse>() {
+            new GetMovies().getUpcomingMovies(1).enqueue(new Callback<MovieResponse>() {
                 @Override
                 public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
 //                    System.out.println(response.body().getResults());

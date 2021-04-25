@@ -262,8 +262,9 @@ public interface AppService {
      * UPCOMING*/
 
     @GET("movie/upcoming")
-    Call<MovieResponse> UPCOMING_MOVIE(
+    Call<MovieResponse> GET_UPCOMING_MOVIE(
             @Query("api_key") String api_key,
+            @Query("page") int page,
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );
