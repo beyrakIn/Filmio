@@ -27,8 +27,8 @@ public interface AppService {
 
     @GET("movie/{movie_id}")
     Call<Movie> GET_MOVIE(
-            @Query("api_key") String api_key,
             @Path("movie_id") int movie_id,
+            @Query("api_key") String api_key,
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );

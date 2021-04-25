@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
@@ -19,6 +21,7 @@ import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.ui.adapters.CoverAdapter;
+import com.squad.filmio.ui.adapters.MovieAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,10 @@ public class MoviesFragment extends Fragment {
     private View root, group;
     private ViewPager coverViewPager;
     private LinearLayout mainLinear;
+    private RecyclerView popularRecyclerView;
+    private List<Movie> movies = new ArrayList<>();
+    private int pageCount = 1;
+    private MovieAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,12 +46,52 @@ public class MoviesFragment extends Fragment {
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
         mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
+        popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
+        adapter = new MovieAdapter(getContext(), movies);
+        popularRecyclerView.setAdapter(adapter);
+        popularRecyclerView.setHasFixedSize(true);
+        popularRecyclerView.setItemViewCacheSize(150);
 
-
-        loadGenres();
-
+        loadData(pageCount);
+//        loadGenres();
+        initScroll();
         initViewPager();
         return root;
+    }
+
+    private void initScroll() {
+        popularRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView2, int newState) {
+                super.onScrollStateChanged(recyclerView2, newState);
+                if (!popularRecyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    loadData(pageCount);
+                }
+            }
+        });
+    }
+
+    private void loadData(int page) {
+        new Thread(() -> {
+            new GetMovies().getPopularMovies(page).enqueue(new Callback<MovieResponse>() {
+                @Override
+                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        movies = response.body().getResults();
+
+//                        adapter.notifyDataSetChanged();
+                        adapter.updateData(movies);
+                        pageCount++;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MovieResponse> call, Throwable t) {
+
+                }
+            });
+        }).start();
     }
 
     private void loadGenres() {
@@ -57,8 +104,8 @@ public class MoviesFragment extends Fragment {
                         for (Genre genre : response.body().getGenres()) {
                             group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                             TextView title = group.findViewById(R.id.group_title);
-                            title.setOnClickListener(v ->{
-//                                Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_viewAllFragment);
+                            title.setOnClickListener(v -> {
+                                Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
                             });
                             title.setText(genre.getName());
                             mainLinear.addView(group);
@@ -77,11 +124,11 @@ public class MoviesFragment extends Fragment {
     private void initViewPager() {
         List<Movie> movies = new ArrayList<>();
 
-        new Thread(()->{
-            new GetMovies().getPopularMovies().enqueue(new Callback<MovieResponse>() {
+        new Thread(() -> {
+            new GetMovies().getPopularMovies(pageCount).enqueue(new Callback<MovieResponse>() {
                 @Override
                 public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         assert response.body() != null;
                         movies.addAll(response.body().getResults());
                         CoverAdapter coverAdapter = new CoverAdapter(movies, getContext());

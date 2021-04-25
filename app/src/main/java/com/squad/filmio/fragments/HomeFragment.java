@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment {
     private List<Movie> movies = new ArrayList<>();
     private RecyclerView recyclerView;
     private int pageCount = 1;
+    private UpcomingAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,6 +39,10 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        adapter = new UpcomingAdapter(getContext(), movies);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(150);
 
         loadData(pageCount);
         initScroll();
@@ -64,11 +69,9 @@ public class HomeFragment extends Fragment {
                     if (response.isSuccessful()) {
                         MovieResponse movieResponse = response.body();
                         assert movieResponse != null;
-                        movies.addAll(movieResponse.getResults());
-                        UpcomingAdapter adapter = new UpcomingAdapter(getContext(), movies);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.setItemViewCacheSize(150);
+                        movies = movieResponse.getResults();
+                        adapter.updateData(movies);
+
 //                        adapter.notifyDataSetChanged();
                         pageCount++;
                     }

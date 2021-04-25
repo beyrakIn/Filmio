@@ -12,36 +12,32 @@ import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.models.movie.Movie;
-import com.squad.filmio.ui.views.VerticalItem;
+import com.squad.filmio.ui.views.SimpleItem;
 
 import java.util.List;
 
-public class UpcomingAdapter extends RecyclerView.Adapter<VerticalItem> {
+public class MovieAdapter extends RecyclerView.Adapter<SimpleItem> {
     private Context context;
     private List<Movie> movies;
 
-    public UpcomingAdapter(Context context, List<Movie> movies) {
+    public MovieAdapter(Context context, List<Movie> movies) {
         this.context = context;
         this.movies = movies;
-        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public VerticalItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_item, parent, false);
-        return new VerticalItem(view);
+    public SimpleItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_item, parent, false);
+        return new SimpleItem(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VerticalItem holder, int position) {
+    public void onBindViewHolder(@NonNull SimpleItem holder, int position) {
         Movie movie = movies.get(position);
-        holder.title.setText(movie.getTitle());
-        holder.subTitle.setText(movie.getOverview());
-
         Glide.with(holder.itemView.getContext())
                 .load(Constants.SRC + movie.getPoster_path())
-                .into(holder.imageView);
+                .into(holder.picture);
     }
 
     @Override
