@@ -11,7 +11,7 @@ public class Movie implements Serializable {
     private boolean adult;
     private String backdrop_path;
     List<Integer> genre_ids = new ArrayList<>();
-    private String belongs_to_collection = null;
+    private Collection belongs_to_collection = new Collection();
     private float budget;
     List<Genre> genres = new ArrayList<>();
     private String homepage;
@@ -46,7 +46,7 @@ public class Movie implements Serializable {
         return backdrop_path;
     }
 
-    public String getBelongs_to_collection() {
+    public Collection getBelongs_to_collection() {
         return belongs_to_collection;
     }
 
@@ -132,7 +132,7 @@ public class Movie implements Serializable {
         this.backdrop_path = backdrop_path;
     }
 
-    public void setBelongs_to_collection(String belongs_to_collection) {
+    public void setBelongs_to_collection(Collection belongs_to_collection) {
         this.belongs_to_collection = belongs_to_collection;
     }
 

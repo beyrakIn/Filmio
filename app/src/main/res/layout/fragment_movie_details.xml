@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:fontFamily="@font/nunito_bold"
-                        android:lines="1"
+                        android:lines="2"
                         android:text=""
                         android:textColor="@color/black" />
 

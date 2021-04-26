@@ -11,6 +11,7 @@ import com.squad.filmio.api.models.person.PersonMovieCredits;
 import com.squad.filmio.api.models.person.PersonTvCredits;
 import com.squad.filmio.api.models.company.CompanyResponse;
 import com.squad.filmio.api.models.movie.MovieResponse;
+import com.squad.filmio.api.models.tv.Tv;
 import com.squad.filmio.api.models.tv.TvResponse;
 import com.squad.filmio.api.models.translation.TranslationResponse;
 import com.squad.filmio.api.models.video.VideoResponse;
@@ -221,6 +222,14 @@ public interface AppService {
     /**
      * TV
      */
+
+    @GET("tv/{tv_id}")
+    Call<Tv> GET_TV_SHOW(
+            @Path("tv_id") int tv_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
 
     @GET("tv/popular")
     Call<TvResponse> GET_POPULAR_TV(

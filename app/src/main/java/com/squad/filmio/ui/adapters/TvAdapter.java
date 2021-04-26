@@ -1,12 +1,14 @@
 package com.squad.filmio.ui.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,7 +44,9 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, String.valueOf(tv.getId()), Toast.LENGTH_SHORT).show();
+            Bundle args = new Bundle();
+            args.putInt("tvId", tv.getId());
+            Navigation.findNavController(v).navigate(R.id.action_navigation_tv_to_movieDetailsFragment, args);
         });
     }
 
