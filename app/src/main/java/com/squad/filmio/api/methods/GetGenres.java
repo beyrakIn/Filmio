@@ -7,6 +7,8 @@ import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GetGenres {
     AppService appService;

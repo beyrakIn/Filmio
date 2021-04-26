@@ -11,12 +11,13 @@ import com.squad.filmio.R;
 
 public class VerticalItem extends RecyclerView.ViewHolder {
     public ImageView imageView;
-    public TextView title, subTitle;
+    public TextView title, subTitle, genres;
 
     public VerticalItem(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.item_vertical_picture);
         title = itemView.findViewById(R.id.item_title);
         subTitle = itemView.findViewById(R.id.item_subtitle);
+        genres = itemView.findViewById(R.id.item_genres);
     }
 }
