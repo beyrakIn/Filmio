@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:scrollbars="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
                 tools:itemCount="5"

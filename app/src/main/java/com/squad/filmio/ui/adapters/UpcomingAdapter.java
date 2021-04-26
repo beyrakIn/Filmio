@@ -78,25 +78,4 @@ public class UpcomingAdapter extends RecyclerView.Adapter<VerticalItem> {
         this.movies.addAll(movies);
         notifyDataSetChanged();
     }
-
-    public Genre getGenre(int id) {
-        Genre genre = new Genre();
-//        new Thread(()->{
-        new GetGenres().getMoviesGenre(id).enqueue(new Callback<Genre>() {
-            @Override
-            public void onResponse(Call<Genre> call, Response<Genre> response) {
-                if (response.isSuccessful()) {
-                    Genre genre1 = response.body();
-                    genre.setId(genre1.getId());
-                    genre.setName(genre1.getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Genre> call, Throwable t) {
-            }
-        });
-//        }).start();
-        return genre;
-    }
 }

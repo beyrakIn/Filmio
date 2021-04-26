@@ -50,7 +50,7 @@ public class MoviesFragment extends Fragment {
         popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
         adapter = new MovieAdapter(getContext(), movies);
         popularRecyclerView.setAdapter(adapter);
-        popularRecyclerView.setHasFixedSize(true);
+        popularRecyclerView.setHasFixedSize(false);
         popularRecyclerView.setItemViewCacheSize(150);
 
         loadData(pageCount);
