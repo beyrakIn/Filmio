@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,8 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
     @Override
     public SimpleItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_item, parent, false);
-        return new SimpleItem(view);    }
+        return new SimpleItem(view);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull SimpleItem holder, int position) {
@@ -38,6 +40,10 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
         Glide.with(holder.itemView.getContext())
                 .load(Constants.POSTER_SRC + tv.getPoster_path())
                 .into(holder.picture);
+
+        holder.itemView.setOnClickListener(v -> {
+            Toast.makeText(context, String.valueOf(tv.getId()), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -45,7 +51,7 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
         return tvs.size();
     }
 
-    public void updateData(List<Tv> tvs){
+    public void updateData(List<Tv> tvs) {
         this.tvs.addAll(tvs);
         notifyDataSetChanged();
     }

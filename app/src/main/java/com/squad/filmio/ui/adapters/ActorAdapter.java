@@ -17,11 +17,11 @@ import com.squad.filmio.ui.views.PersonView;
 
 import java.util.List;
 
-public class PersonAdapter extends RecyclerView.Adapter<PersonView> {
+public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
     private Context context;
     private List<Person> people;
 
-    public PersonAdapter(Context context, List<Person> people) {
+    public ActorAdapter(Context context, List<Person> people) {
         this.context = context;
         this.people = people;
     }

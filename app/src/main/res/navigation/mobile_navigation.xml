@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_actors">
+    app:startDestination="@+id/navigation_movies">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -23,9 +23,6 @@
         <action
             android:id="@+id/action_navigation_movies_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
-        <action
-            android:id="@+id/action_navigation_movies_to_viewAllFragment"
-            app:destination="@id/viewAllFragment" />
     </fragment>
 
     <fragment
@@ -42,7 +39,11 @@
         android:id="@+id/navigation_actors"
         android:name="com.squad.filmio.fragments.ActorsFragment"
         android:label="fragment_actors"
-        tools:layout="@layout/fragment_actors" />
+        tools:layout="@layout/fragment_actors" >
+        <action
+            android:id="@+id/action_navigation_actors_to_actorInfoFragment"
+            app:destination="@id/actorInfoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -50,8 +51,8 @@
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details">
         <action
-            android:id="@+id/action_movieDetailsFragment_to_personFragment"
-            app:destination="@id/personFragment" />
+            android:id="@+id/action_movieDetailsFragment_to_actorInfoFragment"
+            app:destination="@id/actorInfoFragment" />
     </fragment>
 
     <fragment
@@ -59,10 +60,15 @@
         android:name="com.squad.filmio.fragments.ViewAllFragment"
         android:label="fragment_view_all"
         tools:layout="@layout/fragment_view_all" />
+
     <fragment
-        android:id="@+id/personFragment"
-        android:name="com.squad.filmio.PersonFragment"
-        android:label="fragment_person"
-        tools:layout="@layout/fragment_person" />
+        android:id="@+id/actorInfoFragment"
+        android:name="com.squad.filmio.fragments.ActorInfoFragment"
+        android:label="fragment_actor_info"
+        tools:layout="@layout/fragment_actor_info" >
+        <argument
+            android:name="actorId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

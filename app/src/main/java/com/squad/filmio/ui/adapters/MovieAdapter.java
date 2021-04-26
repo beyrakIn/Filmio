@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -41,7 +42,10 @@ public class MovieAdapter extends RecyclerView.Adapter<SimpleItem> {
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
-//            Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
+            Toast.makeText(context, String.valueOf(movie.getId()), Toast.LENGTH_SHORT).show();
+
+//            Navigation.findNavController(v).navigate(action);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
         });
     }
 
@@ -50,7 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<SimpleItem> {
         return movies.size();
     }
 
-    public void updateData(List<Movie> movies){
+    public void updateData(List<Movie> movies) {
         this.movies.addAll(movies);
         notifyDataSetChanged();
     }

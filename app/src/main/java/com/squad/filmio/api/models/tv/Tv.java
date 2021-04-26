@@ -8,7 +8,7 @@ public class Tv implements Serializable {
     private String backdrop_path;
     private String first_air_date;
     List<Integer> genre_ids = new ArrayList<>();
-    private float id;
+    private int id;
     private String name;
     List<String> origin_country = new ArrayList<>();
     private String original_language;
@@ -30,7 +30,7 @@ public class Tv implements Serializable {
         return first_air_date;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -76,7 +76,7 @@ public class Tv implements Serializable {
         this.first_air_date = first_air_date;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

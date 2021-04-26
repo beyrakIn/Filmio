@@ -69,8 +69,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
+                        android:fontFamily="@font/nunito_bold"
                         android:lines="1"
-                        android:text="Item title"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/fragment_movie_details_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:lines="1"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/fragment_movie_details_release_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:lines="1"
+                        android:text=""
                         android:textColor="@color/black" />
 
 

@@ -12,7 +12,7 @@ import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetPeople;
 import com.squad.filmio.api.models.person.Person;
 import com.squad.filmio.api.models.person.PersonResponse;
-import com.squad.filmio.ui.adapters.PersonAdapter;
+import com.squad.filmio.ui.adapters.ActorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class ActorsFragment extends Fragment {
     private View root;
     private RecyclerView recyclerView;
-    private PersonAdapter adapter;
+    private ActorAdapter adapter;
     private List<Person> people = new ArrayList<>();
     private int pageCount = 1;
 
@@ -35,7 +35,7 @@ public class ActorsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_actors, container, false);
 
         recyclerView = root.findViewById(R.id.fragment_actors_recycler);
-        adapter = new PersonAdapter(getContext(), people);
+        adapter = new ActorAdapter(getContext(), people);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);
