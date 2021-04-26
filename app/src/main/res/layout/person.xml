@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:padding="8dp"
-	android:clipToPadding="false">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipToPadding="false"
+    android:padding="8dp">
 
-	<View
-		android:id="@+id/speaker_border"
-		android:layout_width="88dp"
-		android:layout_height="88dp"
-		android:layout_marginTop="-8dp"
-		android:layout_centerHorizontal="true"
-		android:alpha="0"
-		android:background="@drawable/person_border"/>
+    <View
+        android:id="@+id/speaker_border"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-8dp"
+        android:alpha="1"
+        android:background="@drawable/person_border" />
 
-	<ImageView
-		android:id="@+id/person_image"
-		android:layout_width="72dp"
-		android:src="@drawable/cover"
-		android:layout_height="72dp"
-		android:layout_centerHorizontal="true"
-		android:layout_alignParentTop="true"
-		tools:src="#0f0"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/person_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/person_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:scaleType="center"
+            android:src="@drawable/cover"
+            tools:src="#0f0" />
+    </androidx.cardview.widget.CardView>
 
 
-	<TextView
-		android:id="@+id/person_name"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_horizontal"
-		android:layout_below="@id/person_image"
-		android:layout_marginTop="8dp"
-		android:singleLine="true"
-		android:ellipsize="end"
-		tools:text="User"/>
+    <TextView
+        android:id="@+id/person_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/person_card_view"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:textColor="@color/colorSubtitle"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        tools:text="User" />
 
 </RelativeLayout>
