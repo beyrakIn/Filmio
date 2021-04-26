@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -36,8 +37,12 @@ public class MovieAdapter extends RecyclerView.Adapter<SimpleItem> {
     public void onBindViewHolder(@NonNull SimpleItem holder, int position) {
         Movie movie = movies.get(position);
         Glide.with(holder.itemView.getContext())
-                .load(Constants.SRC + movie.getPoster_path())
+                .load(Constants.POSTER_SRC + movie.getPoster_path())
                 .into(holder.picture);
+
+        holder.itemView.setOnClickListener(v -> {
+//            Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
+        });
     }
 
     @Override

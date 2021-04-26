@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="186dp"
     android:paddingRight="5dp"
     android:layout_marginBottom="5dp"
     android:clickable="true"
@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="15dp"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="15dp">
 
         <ImageView
             android:id="@+id/item_simple_picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerInside" />
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

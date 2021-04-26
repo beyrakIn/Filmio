@@ -47,7 +47,7 @@ public class CoverAdapter extends PagerAdapter {
 
         coverPictures = view.findViewById(R.id.item_cover_picture);
         Glide.with(context)
-                .load(Constants.SRC + movie.getBackdrop_path())
+                .load(Constants.BACK_SRC + movie.getBackdrop_path())
                 .into(coverPictures);
 
         coverPictures.setOnClickListener(v -> {

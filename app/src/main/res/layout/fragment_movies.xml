@@ -8,39 +8,47 @@
     android:orientation="vertical"
     tools:context=".fragments.MoviesFragment">
 
-    <!--
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/movies_fragment_main_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/movies_fragment_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never"
+                    android:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_movies_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/simple_item" />
+
+
+            </LinearLayout>  <!--
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none">-->
-
-    <LinearLayout
-        android:id="@+id/movies_fragment_main_linear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/movies_fragment_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:clipToPadding="false"
-            android:foregroundGravity="center"
-            android:overScrollMode="never"
-            android:visibility="gone" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_movies_recycler"
-            android:layout_width="match_parent"
-            android:paddingLeft="5dp"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
-            tools:itemCount="5"
-            tools:listitem="@layout/simple_item" />
-
-
-    </LinearLayout>
-    <!--    </ScrollView>-->
+        </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

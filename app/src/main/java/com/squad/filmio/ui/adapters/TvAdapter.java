@@ -36,7 +36,7 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
     public void onBindViewHolder(@NonNull SimpleItem holder, int position) {
         Tv tv = tvs.get(position);
         Glide.with(holder.itemView.getContext())
-                .load(Constants.SRC + tv.getPoster_path())
+                .load(Constants.POSTER_SRC + tv.getPoster_path())
                 .into(holder.picture);
     }
 

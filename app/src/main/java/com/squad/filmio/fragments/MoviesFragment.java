@@ -133,7 +133,7 @@ public class MoviesFragment extends Fragment {
                         movies.addAll(response.body().getResults());
                         CoverAdapter coverAdapter = new CoverAdapter(movies, getContext());
                         coverViewPager.setAdapter(coverAdapter);
-                        coverViewPager.setPadding(120, 10, 120, 0);
+                        coverViewPager.setPadding(220, 10, 300, 10);
                         coverViewPager.setCurrentItem(1);
                     }
                 }

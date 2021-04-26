@@ -61,7 +61,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<VerticalItem> {
         holder.subTitle.setText(movie.getOverview());
 
         Glide.with(holder.itemView.getContext())
-                .load(Constants.SRC + movie.getPoster_path())
+                .load(Constants.POSTER_SRC + movie.getPoster_path())
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {

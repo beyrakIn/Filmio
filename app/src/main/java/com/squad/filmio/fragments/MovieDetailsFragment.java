@@ -54,10 +54,10 @@ public class MovieDetailsFragment extends Fragment {
                         Movie movie = response.body();
                         overview.setText(movie.getOverview());
                         Glide.with(root)
-                                .load(Constants.SRC + movie.getBackdrop_path())
+                                .load(Constants.BACK_SRC + movie.getBackdrop_path())
                                 .into(backdrop);
                         Glide.with(root)
-                                .load(Constants.SRC + movie.getPoster_path())
+                                .load(Constants.POSTER_SRC + movie.getPoster_path())
                                 .into(poster);
 
                         title.setText(movie.getTitle());
