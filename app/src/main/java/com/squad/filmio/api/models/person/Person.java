@@ -11,7 +11,7 @@ public class Person {
     private String deathday;
     private float gender;
     private String homepage;
-    private float id;
+    private int id;
     private String imdb_id;
     private String known_for_department;
     private String name;
@@ -46,7 +46,7 @@ public class Person {
         return homepage;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -100,7 +100,7 @@ public class Person {
         this.homepage = homepage;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

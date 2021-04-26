@@ -1,5 +1,6 @@
 package com.squad.filmio.api;
 
+import com.squad.filmio.api.models.person.PersonResponse;
 import com.squad.filmio.api.models.review.ReviewResponse;
 import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.genre.GenreResponse;
@@ -209,13 +210,13 @@ public interface AppService {
             @Query("include_image_language") String image_language
     );
 
-//    @GET("person/popular")
-//    Call<Discover> GET_PERSON_POPULAR(
-//            @Path("person_id") int person_id,
-//            @Query("api_key") String api_key,
-//            @Query("language") String language,
-//            @Query("include_image_language") String image_language
-//    );
+    @GET("person/popular")
+    Call<PersonResponse> GET_POPULAR_PEOPLE(
+            @Query("api_key") String api_key,
+            @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
 
     /**
      * TV

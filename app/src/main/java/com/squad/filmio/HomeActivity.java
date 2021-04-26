@@ -1,8 +1,6 @@
 package com.squad.filmio;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -27,7 +25,8 @@ public class HomeActivity extends AppCompatActivity {
     private void initBottomBar() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_movies, R.id.navigation_tv)
+                R.id.navigation_home, R.id.navigation_movies, R.id.navigation_tv, R.id.navigation_actors
+        )
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         try {
