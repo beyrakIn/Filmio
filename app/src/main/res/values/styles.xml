@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,5 +20,10 @@
 <!--        <item name="windowActionBar">false</item>-->
 <!--        <item name="windowNoTitle">true</item>-->
     </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView" android:state_selected="true">
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
 
 </resources>
