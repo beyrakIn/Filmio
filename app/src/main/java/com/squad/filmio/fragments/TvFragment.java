@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchFragment extends Fragment {
+public class TvFragment extends Fragment {
     private RecyclerView recyclerView;
     private TvAdapter adapter;
     private List<Tv> tvs = new ArrayList<>();
@@ -33,7 +33,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        View root = inflater.inflate(R.layout.fragment_tv, container, false);
 
         recyclerView = root.findViewById(R.id.fragment_tv_recycler);
         adapter = new TvAdapter(getContext(), tvs);

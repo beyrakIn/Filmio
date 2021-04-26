@@ -49,7 +49,6 @@ public class MoviesFragment extends Fragment {
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
         mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
-//        popularRecyclerView = group.findViewById(R.id.group_recycler_view);
         popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
         adapter = new MovieAdapter(getContext(), movies);
         popularRecyclerView.setAdapter(adapter);
@@ -75,7 +74,6 @@ public class MoviesFragment extends Fragment {
     }
 
     private void loadData(int page) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
         new Thread(() -> {
             new GetMovies().getPopularMovies(page).enqueue(new Callback<MovieResponse>() {
                 @Override
