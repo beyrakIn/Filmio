@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:clickable="true"
     android:layout_height="200dp"
+    android:background="@color/black"
     android:orientation="vertical"
     android:paddingHorizontal="10dp"
     android:focusable="true">
@@ -47,11 +48,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="7dp"
+            android:textColor="@color/white"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_bold"
             android:lines="1"
             android:text="Item title"
-            android:textColor="@color/black"
             android:textSize="17dp" />
 
         <TextView

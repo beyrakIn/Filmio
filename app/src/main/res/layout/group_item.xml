@@ -22,11 +22,11 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/martel_sans_bold"
             android:layout_marginLeft="10dp"
             android:layout_toStartOf="@+id/view_all"
             android:layout_toLeftOf="@+id/view_all"
             android:ellipsize="end"
+            android:fontFamily="@font/martel_sans_bold"
             android:lines="1"
             android:text="Group title"
             android:textColor="@color/colorWhite"
@@ -52,14 +52,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recycler_view"
+        android:layout_below="@+id/head_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/head_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="20"
+        android:paddingLeft="5dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:itemCount="5"
         tools:listitem="@layout/simple_item" />
 
 </RelativeLayout>

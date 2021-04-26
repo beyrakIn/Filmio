@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -44,9 +45,11 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_movies, container, false);
+        group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
         mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
+//        popularRecyclerView = group.findViewById(R.id.group_recycler_view);
         popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
         adapter = new MovieAdapter(getContext(), movies);
         popularRecyclerView.setAdapter(adapter);
@@ -54,7 +57,6 @@ public class MoviesFragment extends Fragment {
         popularRecyclerView.setItemViewCacheSize(150);
 
         loadData(pageCount);
-//        loadGenres();
         initScroll();
         initViewPager();
         return root;
@@ -73,6 +75,7 @@ public class MoviesFragment extends Fragment {
     }
 
     private void loadData(int page) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
         new Thread(() -> {
             new GetMovies().getPopularMovies(page).enqueue(new Callback<MovieResponse>() {
                 @Override
@@ -104,9 +107,9 @@ public class MoviesFragment extends Fragment {
                         for (Genre genre : response.body().getGenres()) {
                             group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                             TextView title = group.findViewById(R.id.group_title);
-                            title.setOnClickListener(v -> {
-                                Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
-                            });
+//                            title.setOnClickListener(v -> {
+//                                Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
+//                            });
                             title.setText(genre.getName());
                             mainLinear.addView(group);
                         }
@@ -120,6 +123,8 @@ public class MoviesFragment extends Fragment {
             });
         }).start();
     }
+
+
 
     private void initViewPager() {
         List<Movie> movies = new ArrayList<>();
@@ -145,4 +150,5 @@ public class MoviesFragment extends Fragment {
             });
         }).start();
     }
+
 }
