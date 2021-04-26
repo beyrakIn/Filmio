@@ -1,6 +1,7 @@
 package com.squad.filmio.ui.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +43,9 @@ public class MovieAdapter extends RecyclerView.Adapter<SimpleItem> {
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, String.valueOf(movie.getId()), Toast.LENGTH_SHORT).show();
-
-//            Navigation.findNavController(v).navigate(action);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment);
+            Bundle args = new Bundle();
+            args.putInt("movieId", movie.getId());
+            Navigation.findNavController(v).navigate(R.id.action_navigation_movies_to_movieDetailsFragment, args);
         });
     }
 

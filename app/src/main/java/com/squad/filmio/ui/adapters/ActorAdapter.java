@@ -1,18 +1,22 @@
 package com.squad.filmio.ui.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.models.person.Person;
+import com.squad.filmio.fragments.ActorInfoFragment;
+import com.squad.filmio.fragments.ActorsFragment;
 import com.squad.filmio.ui.views.PersonView;
 
 import java.util.List;
@@ -42,7 +46,11 @@ public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, String.valueOf(person.getPopularity()), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, String.valueOf(person.getPopularity()), Toast.LENGTH_SHORT).show();
+            Bundle args = new Bundle();
+            args.putInt("actorId", person.getId());
+            Navigation.findNavController(v).navigate(R.id.action_navigation_actors_to_actorInfoFragment, args);
+
         });
     }
 

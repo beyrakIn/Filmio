@@ -28,6 +28,7 @@ public class MovieDetailsFragment extends Fragment {
     private Activity activity;
     private ImageView poster, backdrop;
     private TextView title, subTitle, genres, overview, runtime, releaseDate;
+    private int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,14 +45,16 @@ public class MovieDetailsFragment extends Fragment {
         runtime = root.findViewById(R.id.fragment_movie_details_runtime);
         releaseDate = root.findViewById(R.id.fragment_movie_details_release_date);
 
-        getMovie();
+        Bundle args = getArguments();
+        id = args.getInt("movieId", 0);
+        getMovie(id);
         return root;
     }
 
-    private void getMovie() {
+    private void getMovie(int movieId) {
         new Thread(() -> {
 //            299536
-            new GetMovies().getMovie(785534).enqueue(new Callback<Movie>() {
+            new GetMovies().getMovie(movieId).enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     System.out.println("STEP TWO");
@@ -76,7 +79,7 @@ public class MovieDetailsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<Movie> call, Throwable t) {
-                    getMovie();
+                    getMovie(id);
                 }
             });
         }
