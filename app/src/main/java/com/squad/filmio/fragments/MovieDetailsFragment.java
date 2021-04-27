@@ -12,10 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -119,6 +118,7 @@ public class MovieDetailsFragment extends Fragment {
                             castTitle.setText("ACTORS");
 
                             RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                            castRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
                             ActorAdapter actorAdapter = new ActorAdapter(getContext(),
                                     movieCredit.getCast(),
                                     R.id.action_movieDetailsFragment_to_actorInfoFragment);

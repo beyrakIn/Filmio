@@ -1,5 +1,7 @@
 package com.squad.filmio.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -28,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MoviesFragment extends Fragment {
+    private Activity activity;
     private View root, group;
     private ViewPager coverViewPager;
     private LinearLayout mainLinear;
@@ -40,6 +44,9 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_movies, container, false);
+        activity = (AppCompatActivity) root.getContext();
+        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
 
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);

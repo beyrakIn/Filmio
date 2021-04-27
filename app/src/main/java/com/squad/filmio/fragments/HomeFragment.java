@@ -1,5 +1,7 @@
 package com.squad.filmio.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
+    private Activity activity;
     private View root;
     private List<Movie> movies = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -37,6 +41,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
+        activity = (AppCompatActivity) root.getContext();
+        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         recyclerView = root.findViewById(R.id.upcoming_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());

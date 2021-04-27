@@ -1,5 +1,7 @@
 package com.squad.filmio.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TvFragment extends Fragment {
+    private Activity activity;
     private RecyclerView recyclerView;
     private TvAdapter adapter;
     private List<Tv> tvs = new ArrayList<>();
@@ -35,6 +39,8 @@ public class TvFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_tv, container, false);
+        activity = (AppCompatActivity) root.getContext();
+        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         recyclerView = root.findViewById(R.id.fragment_tv_recycler);
         adapter = new TvAdapter(getContext(), tvs);

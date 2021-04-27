@@ -1,5 +1,7 @@
 package com.squad.filmio.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ActorsFragment extends Fragment {
+    private Activity activity;
     private View root;
     private RecyclerView recyclerView;
     private ActorAdapter adapter;
@@ -35,6 +39,9 @@ public class ActorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_actors, container, false);
+        activity = (AppCompatActivity) root.getContext();
+        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 
         recyclerView = root.findViewById(R.id.fragment_actors_recycler);
         adapter = new ActorAdapter(getContext(), people, R.id.action_navigation_actors_to_actorInfoFragment);

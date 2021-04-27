@@ -42,6 +42,7 @@
         android:layout_below="@id/person_card_view"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
+        android:maxWidth="92dp"
         android:gravity="center_horizontal"
         android:singleLine="true"
         android:textColor="@color/colorSubtitle"
