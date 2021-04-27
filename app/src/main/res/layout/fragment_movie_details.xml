@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".fragments.MovieDetailsFragment">
 
     <RelativeLayout
@@ -17,6 +18,13 @@
             android:layout_height="220dp"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/fragment_movie_details_backdrop"
+            android:alpha="0.5"
+            android:background="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +68,7 @@
                         android:fontFamily="@font/roboto_bold"
                         android:lines="1"
                         android:text="Item title"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorAccent"
                         android:textSize="17dp" />
 
                     <TextView
@@ -70,8 +78,7 @@
                         android:layout_marginLeft="7dp"
                         android:fontFamily="@font/nunito_bold"
                         android:lines="2"
-                        android:text=""
-                        android:textColor="@color/black" />
+                        android:textColor="@color/colorAccent" />
 
                     <TextView
                         android:id="@+id/fragment_movie_details_runtime"
@@ -79,8 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:lines="1"
-                        android:text=""
-                        android:textColor="@color/black" />
+                        android:textColor="@color/colorAccent" />
 
 
                     <TextView
@@ -89,8 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:lines="1"
-                        android:text=""
-                        android:textColor="@color/black" />
+                        android:textColor="@color/colorAccent" />
 
 
                 </LinearLayout>
@@ -102,15 +107,18 @@
                 android:fontFamily="@font/anton"
                 android:text="@string/overview"
                 android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/fragment_movie_details_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsup dolor sit amet" />
+                android:fontFamily="@font/lato_bold"
+                android:text="Lorem ipsup dolor sit amet"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
         </LinearLayout>
     </RelativeLayout>
 
-</ScrollView>
+</com.nirhart.parallaxscroll.views.ParallaxScrollView>

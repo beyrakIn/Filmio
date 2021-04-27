@@ -8,10 +8,9 @@
     android:orientation="vertical"
     tools:context=".fragments.MoviesFragment">
 
-    <ScrollView
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animationCache="false">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/movies_fragment_main_linear"
@@ -27,7 +26,7 @@
                 android:clipToPadding="false"
                 android:foregroundGravity="center"
                 android:overScrollMode="never"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_movies_recycler"
@@ -41,5 +40,5 @@
                 tools:listitem="@layout/simple_item" />
 
         </LinearLayout>
-    </ScrollView>
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
 </LinearLayout>

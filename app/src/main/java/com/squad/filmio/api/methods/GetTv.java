@@ -19,8 +19,8 @@ public class GetTv {
         return appService.GET_POPULAR_TV(KEY, page, LANG, LANG);
     }
 
-    public Call<TvResponse> getTopRatedTv() {
-        return appService.GET_TOP_RATED_TV(KEY, 1, "tr", "tr-TR");
+    public Call<TvResponse> getTopRatedTv(int page) {
+        return appService.GET_TOP_RATED_TV(KEY, page, LANG, LANG);
     }
 
     public Call<Tv> getTvShow(int id) {

@@ -5,36 +5,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonMovieCredits implements Serializable {
-    List<CastMovie> cast = new ArrayList<>();
-    List<CrewMovie> crew = new ArrayList<>();
-    private float id;
+    List<CreditMovie> cast = new ArrayList<>();
+    List<CreditMovie> crew = new ArrayList<>();
+    private int id;
 
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
     // Setter Methods
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public List<CastMovie> getCast() {
+    public List<CreditMovie> getCast() {
         return cast;
     }
 
-    public void setCast(List<CastMovie> cast) {
+    public void setCast(List<CreditMovie> cast) {
         this.cast = cast;
     }
 
-    public List<CrewMovie> getCrew() {
+    public List<CreditMovie> getCrew() {
         return crew;
     }
 
-    public void setCrew(List<CrewMovie> crew) {
+    public void setCrew(List<CreditMovie> crew) {
         this.crew = crew;
     }
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonTvCredits implements Serializable {
-    List<CastTv> cast = new ArrayList<>();
-    List<CastMovie> crew = new ArrayList<>();
+    List<CreditTv> cast = new ArrayList<>();
+    List<CreditTv> crew = new ArrayList<>();
     private int id;
 
 
@@ -22,19 +22,19 @@ public class PersonTvCredits implements Serializable {
         this.id = id;
     }
 
-    public List<CastTv> getCast() {
+    public List<CreditTv> getCast() {
         return cast;
     }
 
-    public void setCast(List<CastTv> cast) {
+    public void setCast(List<CreditTv> cast) {
         this.cast = cast;
     }
 
-    public List<CastMovie> getCrew() {
+    public List<CreditTv> getCrew() {
         return crew;
     }
 
-    public void setCrew(List<CastMovie> crew) {
+    public void setCrew(List<CreditTv> crew) {
         this.crew = crew;
     }
 

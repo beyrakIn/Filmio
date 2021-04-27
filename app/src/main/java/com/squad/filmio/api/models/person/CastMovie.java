@@ -8,7 +8,7 @@ public class CastMovie implements Serializable {
     private boolean adult;
     private String backdrop_path;
     List<Integer> genre_ids = new ArrayList<>();
-    private float id;
+    private int id;
     private String original_language;
     private String original_title;
     private String overview;
@@ -34,7 +34,7 @@ public class CastMovie implements Serializable {
         return backdrop_path;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -100,7 +100,7 @@ public class CastMovie implements Serializable {
         this.backdrop_path = backdrop_path;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 
