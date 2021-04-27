@@ -1,25 +1,20 @@
 package com.squad.filmio.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
-import com.squad.filmio.api.methods.GetGenres;
 import com.squad.filmio.api.methods.GetMovies;
-import com.squad.filmio.api.models.genre.Genre;
-import com.squad.filmio.api.models.genre.GenreResponse;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.ui.adapters.CoverAdapter;
@@ -57,7 +52,7 @@ public class MoviesFragment extends Fragment {
 
         loadData(pageCount);
         initScroll();
-        initViewPager();
+//        initViewPager();
         return root;
     }
 
@@ -74,27 +69,34 @@ public class MoviesFragment extends Fragment {
     }
 
     private void loadData(int page) {
-        new Thread(() -> {
-            new GetMovies().getPopularMovies(page).enqueue(new Callback<MovieResponse>() {
-                @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                    if (response.isSuccessful()) {
-                        assert response.body() != null;
-                        movies = response.body().getResults();
-                        adapter.updateData(movies);
-                        pageCount++;
+        try {
+            new Thread(() -> {
+                new GetMovies().getPopularMovies(page).enqueue(new Callback<MovieResponse>() {
+                    @Override
+                    public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                        if (response.isSuccessful()) {
+                            assert response.body() != null;
+                            movies = response.body().getResults();
+                            adapter.updateData(movies);
+                            pageCount++;
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    loadData(pageCount);
-                }
-            });
-        }).start();
+                    @Override
+                    public void onFailure(Call<MovieResponse> call, Throwable t) {
+//                        Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(() -> {
+                            loadData(pageCount);
+                        }, 10000);
+                    }
+                });
+            }).start();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
+/*
     private void loadGenres() {
         new Thread(() -> {
             new GetGenres().getMoviesGenres().enqueue(new Callback<GenreResponse>() {
@@ -122,6 +124,7 @@ public class MoviesFragment extends Fragment {
         }).start();
     }
 
+*/
 
 
     private void initViewPager() {

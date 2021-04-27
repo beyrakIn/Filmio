@@ -30,7 +30,6 @@
             android:layout_height="75dp"
             android:background="?attr/selectableItemBackground"
             android:scaleType="center"
-            android:src="@drawable/cover"
             tools:src="#0f0" />
     </androidx.cardview.widget.CardView>
 

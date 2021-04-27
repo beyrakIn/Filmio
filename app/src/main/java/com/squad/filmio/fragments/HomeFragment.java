@@ -1,6 +1,8 @@
 package com.squad.filmio.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,25 +65,31 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadData(int page) {
-        new Thread(() -> {
-            new GetMovies().getUpcomingMovies(page).enqueue(new Callback<MovieResponse>() {
-                @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                    if (response.isSuccessful()) {
-                        MovieResponse movieResponse = response.body();
-                        assert movieResponse != null;
-                        movies = movieResponse.getResults();
-                        adapter.updateData(movies);
-                        pageCount++;
+        try {
+            new Thread(() -> {
+                new GetMovies().getUpcomingMovies(page).enqueue(new Callback<MovieResponse>() {
+                    @Override
+                    public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                        if (response.isSuccessful()) {
+                            MovieResponse movieResponse = response.body();
+                            assert movieResponse != null;
+                            movies = movieResponse.getResults();
+                            adapter.updateData(movies);
+                            pageCount++;
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    loadData(pageCount);
-                }
-            });
-        }).start();
+                    @Override
+                    public void onFailure(Call<MovieResponse> call, Throwable t) {
+//                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(() -> {
+                            loadData(pageCount);
+                        }, 5000);
+                    }
+                });
+            }).start();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

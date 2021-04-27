@@ -1,9 +1,11 @@
 package com.squad.filmio.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,22 +62,28 @@ public class ActorsFragment extends Fragment {
     }
 
     private void loadData(int page) {
-        new Thread(() -> {
-            new GetPeople().getPopularActors(page).enqueue(new Callback<PersonResponse>() {
-                @Override
-                public void onResponse(Call<PersonResponse> call, Response<PersonResponse> response) {
-                    if (response.isSuccessful()) {
-                        people = response.body().getResults();
-                        adapter.updateData(people);
-                        pageCount++;
+        try {
+            new Thread(() -> {
+                new GetPeople().getPopularActors(page).enqueue(new Callback<PersonResponse>() {
+                    @Override
+                    public void onResponse(Call<PersonResponse> call, Response<PersonResponse> response) {
+                        if (response.isSuccessful()) {
+                            people = response.body().getResults();
+                            adapter.updateData(people);
+                            pageCount++;
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<PersonResponse> call, Throwable t) {
-
-                }
-            });
-        }).start();
+                    @Override
+                    public void onFailure(Call<PersonResponse> call, Throwable t) {
+                        new Handler().postDelayed(() -> {
+                            loadData(pageCount);
+                        }, 5000);
+                    }
+                });
+            }).start();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

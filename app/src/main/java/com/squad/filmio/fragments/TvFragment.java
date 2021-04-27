@@ -1,6 +1,7 @@
 package com.squad.filmio.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,23 +61,28 @@ public class TvFragment extends Fragment {
     }
 
     private void loadData(int page) {
-        new Thread(() -> {
-            new GetTv().getPopularTv(page).enqueue(new Callback<TvResponse>() {
-                @Override
-                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
-                    if (response.isSuccessful()) {
-                        tvs = response.body().getResults();
-                        adapter.updateData(tvs);
-                        pageCount++;
+        try {
+            new Thread(() -> {
+                new GetTv().getPopularTv(page).enqueue(new Callback<TvResponse>() {
+                    @Override
+                    public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                        if (response.isSuccessful()) {
+                            tvs = response.body().getResults();
+                            adapter.updateData(tvs);
+                            pageCount++;
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<TvResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    loadData(pageCount);
-                }
-            });
-        }).start();
+                    @Override
+                    public void onFailure(Call<TvResponse> call, Throwable t) {
+                        new Handler().postDelayed(() -> {
+                            loadData(pageCount);
+                        }, 5000);
+                    }
+                });
+            }).start();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

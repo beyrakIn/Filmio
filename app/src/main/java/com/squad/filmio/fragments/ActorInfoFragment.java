@@ -189,21 +189,21 @@ public class ActorInfoFragment extends Fragment {
         }).start();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    }
+//    @Override
+//    public void onDestroy() {
+//        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        super.onDestroy();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        super.onPause();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        super.onResume();
+//    }
 }

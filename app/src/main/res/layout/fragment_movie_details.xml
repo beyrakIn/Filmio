@@ -27,9 +27,9 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/fragment_movie_details_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_movie_details_linear"
             android:layout_below="@id/fragment_movie_details_backdrop"
             android:layout_marginTop="-50dp"
             android:orientation="vertical"
@@ -68,7 +68,6 @@
                         android:layout_marginLeft="7dp"
                         android:fontFamily="@font/roboto_bold"
                         android:lines="1"
-                        android:text="Item title"
                         android:textColor="@color/colorAccent"
                         android:textSize="17dp" />
 
@@ -116,7 +115,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold"
-                android:text="Lorem ipsup dolor sit amet"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
 
