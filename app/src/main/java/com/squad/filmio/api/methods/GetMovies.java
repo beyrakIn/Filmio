@@ -3,6 +3,7 @@ package com.squad.filmio.api.methods;
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
 import com.squad.filmio.api.models.movie.Movie;
+import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.movie.MovieResponse;
 
 import java.util.Locale;
@@ -27,6 +28,10 @@ public class GetMovies {
 
     public Call<Movie> getMovie(int id) {
         return appService.GET_MOVIE(id, KEY, LANG, LANG);
+    }
+
+    public Call<MovieCredit> getMovieCredits(int id) {
+        return appService.GET_MOVIE_CREDITS(id, KEY, LANG, LANG);
     }
 
 }

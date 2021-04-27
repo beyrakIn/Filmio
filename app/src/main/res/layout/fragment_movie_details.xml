@@ -29,6 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/fragment_movie_details_linear"
             android:layout_below="@id/fragment_movie_details_backdrop"
             android:layout_marginTop="-50dp"
             android:orientation="vertical"
@@ -118,6 +119,7 @@
                 android:text="Lorem ipsup dolor sit amet"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
+
         </LinearLayout>
     </RelativeLayout>
 

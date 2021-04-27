@@ -1,5 +1,6 @@
 package com.squad.filmio.api;
 
+import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.person.PersonResponse;
 import com.squad.filmio.api.models.review.ReviewResponse;
 import com.squad.filmio.api.models.genre.Genre;
@@ -29,6 +30,14 @@ public interface AppService {
 
     @GET("movie/{movie_id}")
     Call<Movie> GET_MOVIE(
+            @Path("movie_id") int movie_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+    @GET("movie/{movie_id}/credits")
+    Call<MovieCredit> GET_MOVIE_CREDITS(
             @Path("movie_id") int movie_id,
             @Query("api_key") String api_key,
             @Query("language") String language,
@@ -98,6 +107,14 @@ public interface AppService {
             @Query("api_key") String api_key,
             @Query("query") String query,
             @Query("page") int page,
+            @Query("language") String language,
+            @Query("include_image_language") String image_language
+    );
+
+    @GET("tv/{tv_id}/credits")
+    Call<MovieCredit> GET_TV_ACTORS(
+            @Path("tv_id") int tv_id,
+            @Query("api_key") String api_key,
             @Query("language") String language,
             @Query("include_image_language") String image_language
     );

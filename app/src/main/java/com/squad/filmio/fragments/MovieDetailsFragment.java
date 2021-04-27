@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
@@ -19,7 +21,9 @@ import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.methods.GetTv;
 import com.squad.filmio.api.models.genre.Genre;
 import com.squad.filmio.api.models.movie.Movie;
+import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.tv.Tv;
+import com.squad.filmio.ui.adapters.ActorAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,9 +32,13 @@ import retrofit2.Response;
 public class MovieDetailsFragment extends Fragment {
     private View root;
     private Activity activity;
+    private LinearLayout linearLayout;
     private ImageView poster, backdrop;
     private TextView title, subTitle, genres, overview, runtime, releaseDate;
     private int movieId, tvId;
+    private GetMovies getMovies = new GetMovies();
+    private GetTv getTv = new GetTv();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +47,7 @@ public class MovieDetailsFragment extends Fragment {
         activity = (AppCompatActivity) root.getContext();
         activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        linearLayout = root.findViewById(R.id.fragment_movie_details_linear);
         backdrop = root.findViewById(R.id.fragment_movie_details_backdrop);
         poster = root.findViewById(R.id.fragment_movie_details_poster);
         overview = root.findViewById(R.id.fragment_movie_details_overview);
@@ -61,7 +70,7 @@ public class MovieDetailsFragment extends Fragment {
 
     private void getTv(int tv) {
         new Thread(() -> {
-            new GetTv().getTvShow(tv).enqueue(new Callback<Tv>() {
+            getTv.getTvShow(tv).enqueue(new Callback<Tv>() {
                 @Override
                 public void onResponse(Call<Tv> call, Response<Tv> response) {
                     if (response.isSuccessful()) {
@@ -88,13 +97,39 @@ public class MovieDetailsFragment extends Fragment {
                     getTv(tvId);
                 }
             });
+            //FILM ACTORS
+            System.out.println("START   " + tv);
+            getTv.getTvActors(tv).enqueue(new Callback<MovieCredit>() {
+                @Override
+                public void onResponse(Call<MovieCredit> call, Response<MovieCredit> response) {
+                    if (response.isSuccessful()) {
+                        MovieCredit movieCredit = response.body();
+                        View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+                        TextView castTitle = cast.findViewById(R.id.group_title);
+                        castTitle.setText("ACTORS");
+                        RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                        ActorAdapter actorAdapter = new ActorAdapter(getContext(), movieCredit.getCast(), R.id.action_movieDetailsFragment_to_actorInfoFragment);
+                        castRecyclerView.setAdapter(actorAdapter);
+//                        actorAdapter.updateData(movieCredits.getCast());
+                        if (movieCredit.getCast().size() != 0 && movieCredit.getCast() != null) {
+                            linearLayout.addView(cast);
+                        }
+                        System.out.println(movieCredit.getCast().toArray().toString() + "erorrr");
+                    }
+                    System.out.println(response.message());
+                }
+
+                @Override
+                public void onFailure(Call<MovieCredit> call, Throwable t) {
+                    System.out.println("AAAAAAAAAAAAAA" + t.getMessage());
+                }
+            });
         }).start();
     }
 
     private void getMovie(int movieId) {
         new Thread(() -> {
-//            299536
-            new GetMovies().getMovie(movieId).enqueue(new Callback<Movie>() {
+            getMovies.getMovie(movieId).enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     if (response.isSuccessful()) {
@@ -121,6 +156,32 @@ public class MovieDetailsFragment extends Fragment {
                     getMovie(movieId);
                 }
             });
+//            FILM ACTORS
+            getMovies.getMovieCredits(movieId).enqueue(new Callback<MovieCredit>() {
+                @Override
+                public void onResponse(Call<MovieCredit> call, Response<MovieCredit> response) {
+                    if (response.isSuccessful()) {
+                        MovieCredit movieCredit = response.body();
+                        View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+                        TextView castTitle = cast.findViewById(R.id.group_title);
+                        castTitle.setText("ACTORS");
+                        RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                        ActorAdapter actorAdapter = new ActorAdapter(getContext(), movieCredit.getCast(), R.id.action_movieDetailsFragment_to_actorInfoFragment);
+                        castRecyclerView.setAdapter(actorAdapter);
+
+//                        actorAdapter.updateData();
+                        if (movieCredit.getCast().size() != 0 && movieCredit.getCast() != null) {
+                            linearLayout.addView(cast);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MovieCredit> call, Throwable t) {
+
+                }
+            });
+
         }
         ).start();
     }

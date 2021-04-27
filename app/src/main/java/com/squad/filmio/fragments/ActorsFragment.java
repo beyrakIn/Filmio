@@ -35,7 +35,7 @@ public class ActorsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_actors, container, false);
 
         recyclerView = root.findViewById(R.id.fragment_actors_recycler);
-        adapter = new ActorAdapter(getContext(), people);
+        adapter = new ActorAdapter(getContext(), people, R.id.action_navigation_actors_to_actorInfoFragment);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);

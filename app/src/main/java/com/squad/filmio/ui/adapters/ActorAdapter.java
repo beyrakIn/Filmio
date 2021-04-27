@@ -24,10 +24,12 @@ import java.util.List;
 public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
     private Context context;
     private List<Person> people;
+    private int action;
 
-    public ActorAdapter(Context context, List<Person> people) {
+    public ActorAdapter(Context context, List<Person> people, int action) {
         this.context = context;
         this.people = people;
+        this.action = action;
     }
 
     @NonNull
@@ -46,11 +48,9 @@ public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
-//            Toast.makeText(context, String.valueOf(person.getPopularity()), Toast.LENGTH_SHORT).show();
             Bundle args = new Bundle();
             args.putInt("actorId", person.getId());
-            Navigation.findNavController(v).navigate(R.id.action_navigation_actors_to_actorInfoFragment, args);
-
+            Navigation.findNavController(v).navigate(action, args);
         });
     }
 

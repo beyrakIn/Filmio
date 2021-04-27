@@ -2,6 +2,7 @@ package com.squad.filmio.api.methods;
 
 import com.squad.filmio.api.AppService;
 import com.squad.filmio.api.Config;
+import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.tv.Tv;
 import com.squad.filmio.api.models.tv.TvResponse;
 
@@ -25,5 +26,10 @@ public class GetTv {
 
     public Call<Tv> getTvShow(int id) {
         return appService.GET_TV_SHOW(id, KEY, LANG, LANG);
+    }
+
+
+    public Call<MovieCredit> getTvActors(int id) {
+        return appService.GET_TV_ACTORS(id, KEY, LANG, LANG);
     }
 }

@@ -19,9 +19,12 @@ import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetPeople;
 import com.squad.filmio.api.models.person.CreditMovie;
+import com.squad.filmio.api.models.person.CreditTv;
 import com.squad.filmio.api.models.person.Person;
 import com.squad.filmio.api.models.person.PersonMovieCredits;
+import com.squad.filmio.api.models.person.PersonTvCredits;
 import com.squad.filmio.ui.adapters.MovieCreditAdapter;
+import com.squad.filmio.ui.adapters.TvCreditAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +35,11 @@ import retrofit2.Response;
 
 
 public class ActorInfoFragment extends Fragment {
-    private View root, group;
+    private View root;
     private Activity activity;
     private LinearLayout linearLayout;
     private ImageView picture;
     private TextView actorName, placeOfBirth, popularity, birthday, biography, knownForDepartment;
-    private List<CreditMovie> movies = new ArrayList<>();
     private int id;
     private GetPeople getPeople = new GetPeople();
 
@@ -60,27 +62,76 @@ public class ActorInfoFragment extends Fragment {
 
         Bundle args = getArguments();
         id = args.getInt("actorId", 0);
-        getMovieCast(id);
-        getMovieCrew(id);
+        getMovieCredits(id);
+        getTvCredits(id);
         loadData(id);
         return root;
     }
 
-    private void getMovieCrew(int id) {
+    private void getTvCredits(int id) {
         new Thread(() -> {
+            getPeople.getPersonTvCredits(id).enqueue(new Callback<PersonTvCredits>() {
+                @Override
+                public void onResponse(Call<PersonTvCredits> call, Response<PersonTvCredits> response) {
+                    if (response.isSuccessful()) {
+                        List<CreditTv> tvs = new ArrayList<>();
+                        PersonTvCredits tvCredits = response.body();
 
+                        View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+                        View crew = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+
+                        TextView castTitle = cast.findViewById(R.id.group_title);
+                        TextView crewTitle = crew.findViewById(R.id.group_title);
+
+                        castTitle.setText("CAST");
+                        crewTitle.setText("CREW");
+
+                        RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                        RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
+
+                        TvCreditAdapter castAdapter = new TvCreditAdapter(getContext(), tvs);
+                        TvCreditAdapter crewAdapter = new TvCreditAdapter(getContext(), tvs);
+
+                        castRecyclerView.setAdapter(castAdapter);
+                        crewRecyclerView.setAdapter(crewAdapter);
+
+                        castAdapter.updateData(tvCredits.getCast());
+                        crewAdapter.updateData(tvCredits.getCrew());
+
+                        if (tvCredits.getCast().size() != 0 && tvCredits.getCast() != null) {
+                            linearLayout.addView(cast);
+                        }
+                        if (tvCredits.getCrew().size() != 0 && tvCredits.getCrew() != null) {
+                            linearLayout.addView(crew);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PersonTvCredits> call, Throwable t) {
+
+                }
+            });
         }).start();
     }
 
-    private void getMovieCast(int id) {
+    private void getMovieCredits(int id) {
         new Thread(() -> {
             getPeople.getPersonMovieCredits(id).enqueue(new Callback<PersonMovieCredits>() {
                 @Override
                 public void onResponse(Call<PersonMovieCredits> call, Response<PersonMovieCredits> response) {
                     if (response.isSuccessful()) {
+                        List<CreditMovie> movies = new ArrayList<>();
                         PersonMovieCredits movieCredits = response.body();
+
                         View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                         View crew = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+
+                        TextView castTitle = cast.findViewById(R.id.group_title);
+                        TextView crewTitle = crew.findViewById(R.id.group_title);
+
+                        castTitle.setText("CAST");
+                        crewTitle.setText("CREW");
 
                         RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
                         RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
@@ -94,10 +145,10 @@ public class ActorInfoFragment extends Fragment {
                         castAdapter.updateData(movieCredits.getCast());
                         crewAdapter.updateData(movieCredits.getCrew());
 
-                        if (movieCredits.getCast().size() != 0) {
+                        if (movieCredits.getCast().size() != 0 && movieCredits.getCast() != null) {
                             linearLayout.addView(cast);
                         }
-                        if (movieCredits.getCrew().size() != 0) {
+                        if (movieCredits.getCrew().size() != 0 && movieCredits.getCrew() != null) {
                             linearLayout.addView(crew);
                         }
                     }
