@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonTvCredits implements Serializable {
+public class PersonTvCredit implements Serializable {
     List<CreditTv> cast = new ArrayList<>();
     List<CreditTv> crew = new ArrayList<>();
     private int id;

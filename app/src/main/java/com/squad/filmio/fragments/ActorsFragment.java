@@ -2,11 +2,13 @@ package com.squad.filmio.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +31,7 @@ import retrofit2.Response;
 public class ActorsFragment extends Fragment {
     private Activity activity;
     private View root;
+    private RelativeLayout loader;
     private RecyclerView recyclerView;
     private ActorAdapter adapter;
     private List<Person> people = new ArrayList<>();
@@ -44,6 +47,7 @@ public class ActorsFragment extends Fragment {
 
 
         recyclerView = root.findViewById(R.id.fragment_actors_recycler);
+        loader = root.findViewById(R.id.fragment_actors_loader);
         adapter = new ActorAdapter(getContext(), people, R.id.action_navigation_actors_to_actorInfoFragment);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
@@ -78,6 +82,11 @@ public class ActorsFragment extends Fragment {
                             people = response.body().getResults();
                             adapter.updateData(people);
                             pageCount++;
+
+                            if (loader.getVisibility() == View.VISIBLE){
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 
 public class TvFragment extends Fragment {
     private Activity activity;
+    private RelativeLayout loader;
     private RecyclerView recyclerView;
     private TvAdapter adapter;
     private List<Tv> tvs = new ArrayList<>();
@@ -42,6 +44,7 @@ public class TvFragment extends Fragment {
         activity = (AppCompatActivity) root.getContext();
         activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        loader = root.findViewById(R.id.relative_loader);
         recyclerView = root.findViewById(R.id.fragment_tv_recycler);
         adapter = new TvAdapter(getContext(), tvs);
         recyclerView.setAdapter(adapter);
@@ -76,6 +79,11 @@ public class TvFragment extends Fragment {
                             tvs = response.body().getResults();
                             adapter.updateData(tvs);
                             pageCount++;
+
+                            if (loader.getVisibility() == View.VISIBLE){
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 

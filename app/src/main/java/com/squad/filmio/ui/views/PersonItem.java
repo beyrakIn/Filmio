@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squad.filmio.R;
 
-public class PersonView extends RecyclerView.ViewHolder {
+public class PersonItem extends RecyclerView.ViewHolder {
     public ImageView picture;
     public TextView name;
 
-    public PersonView(@NonNull View itemView) {
+    public PersonItem(@NonNull View itemView) {
         super(itemView);
 
         picture = itemView.findViewById(R.id.person_image);

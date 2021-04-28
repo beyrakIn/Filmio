@@ -34,5 +34,20 @@
         </LinearLayout>
     </ScrollView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:id="@+id/relative_loader"
+        android:background="@color/black">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:indicatorColor="@color/purple_500"
+            app:indicatorName="BallScaleMultipleIndicator" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -9,7 +9,7 @@ import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.person.Person;
 import com.squad.filmio.api.models.person.PersonImage;
 import com.squad.filmio.api.models.person.PersonMovieCredits;
-import com.squad.filmio.api.models.person.PersonTvCredits;
+import com.squad.filmio.api.models.person.PersonTvCredit;
 import com.squad.filmio.api.models.company.CompanyResponse;
 import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.api.models.tv.Tv;
@@ -197,7 +197,7 @@ public interface AppService {
     );
 
     @GET("person/{person_id}/tv_credits")
-    Call<PersonTvCredits> GET_PERSON_TV_CREDITS(
+    Call<PersonTvCredit> GET_PERSON_TV_CREDITS(
             @Path("person_id") int person_id,
             @Query("api_key") String api_key,
             @Query("language") String language,

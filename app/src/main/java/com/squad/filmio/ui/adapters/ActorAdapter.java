@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -15,13 +14,11 @@ import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.models.person.Person;
-import com.squad.filmio.fragments.ActorInfoFragment;
-import com.squad.filmio.fragments.ActorsFragment;
-import com.squad.filmio.ui.views.PersonView;
+import com.squad.filmio.ui.views.PersonItem;
 
 import java.util.List;
 
-public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
+public class ActorAdapter extends RecyclerView.Adapter<PersonItem> {
     private Context context;
     private List<Person> people;
     private int action;
@@ -34,13 +31,13 @@ public class ActorAdapter extends RecyclerView.Adapter<PersonView> {
 
     @NonNull
     @Override
-    public PersonView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person, parent, false);
-        return new PersonView(view);
+    public PersonItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_item, parent, false);
+        return new PersonItem(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PersonView holder, int position) {
+    public void onBindViewHolder(@NonNull PersonItem holder, int position) {
         Person person = people.get(position);
         holder.name.setText(person.getName());
         Glide.with(holder.itemView.getContext())

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import retrofit2.Response;
 public class MovieDetailsFragment extends Fragment {
     private View root;
     private Activity activity;
+    private RelativeLayout loader;
     private LinearLayout linearLayout;
     private ImageView poster, backdrop;
     private TextView title, subTitle, genres, overview, runtime, releaseDate;
@@ -50,6 +52,7 @@ public class MovieDetailsFragment extends Fragment {
         activity = (AppCompatActivity) root.getContext();
         activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        loader = root.findViewById(R.id.relative_loader);
         linearLayout = root.findViewById(R.id.fragment_movie_details_linear);
         backdrop = root.findViewById(R.id.fragment_movie_details_backdrop);
         poster = root.findViewById(R.id.fragment_movie_details_poster);
@@ -95,6 +98,12 @@ public class MovieDetailsFragment extends Fragment {
                             }
                             runtime.setText(String.valueOf(""));
                             releaseDate.setText(tv.getFirst_air_date());
+
+
+                            if (loader.getVisibility() == View.VISIBLE){
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 
@@ -166,6 +175,11 @@ public class MovieDetailsFragment extends Fragment {
                             }
                             runtime.setText(String.valueOf((int) movie.getRuntime()));
                             releaseDate.setText(movie.getRelease_date());
+
+                            if (loader.getVisibility() == View.VISIBLE){
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 

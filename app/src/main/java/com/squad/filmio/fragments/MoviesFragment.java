@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import retrofit2.Response;
 public class MoviesFragment extends Fragment {
     private Activity activity;
     private View root, group;
+    private RelativeLayout loader;
     private ViewPager coverViewPager;
     private LinearLayout mainLinear;
     private RecyclerView popularRecyclerView;
@@ -46,9 +48,8 @@ public class MoviesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_movies, container, false);
         activity = (AppCompatActivity) root.getContext();
         activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
-
+//        group = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+        loader = root.findViewById(R.id.relative_loader);
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
         mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
         popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
@@ -86,6 +87,11 @@ public class MoviesFragment extends Fragment {
                             movies = response.body().getResults();
                             adapter.updateData(movies);
                             pageCount++;
+
+                            if (loader.getVisibility() == View.VISIBLE){
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import com.squad.filmio.api.models.person.CreditMovie;
 import com.squad.filmio.api.models.person.CreditTv;
 import com.squad.filmio.api.models.person.Person;
 import com.squad.filmio.api.models.person.PersonMovieCredits;
-import com.squad.filmio.api.models.person.PersonTvCredits;
+import com.squad.filmio.api.models.person.PersonTvCredit;
 import com.squad.filmio.ui.adapters.MovieCreditAdapter;
 import com.squad.filmio.ui.adapters.TvCreditAdapter;
 
@@ -38,6 +39,7 @@ public class ActorInfoFragment extends Fragment {
     private View root;
     private Activity activity;
     private LinearLayout linearLayout;
+    private RelativeLayout loader;
     private ImageView picture;
     private TextView actorName, placeOfBirth, popularity, birthday, biography, knownForDepartment;
     private int id;
@@ -52,6 +54,7 @@ public class ActorInfoFragment extends Fragment {
         activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         linearLayout = root.findViewById(R.id.actor_info_main_linear);
+        loader = root.findViewById(R.id.relative_loader);
         picture = root.findViewById(R.id.actors_info_picture);
         actorName = root.findViewById(R.id.actor_info_actor_name);
         placeOfBirth = root.findViewById(R.id.actor_info_place_of_birth);
@@ -70,12 +73,12 @@ public class ActorInfoFragment extends Fragment {
 
     private void getTvCredits(int id) {
         new Thread(() -> {
-            getPeople.getPersonTvCredits(id).enqueue(new Callback<PersonTvCredits>() {
+            getPeople.getPersonTvCredits(id).enqueue(new Callback<PersonTvCredit>() {
                 @Override
-                public void onResponse(Call<PersonTvCredits> call, Response<PersonTvCredits> response) {
+                public void onResponse(Call<PersonTvCredit> call, Response<PersonTvCredit> response) {
                     if (response.isSuccessful()) {
                         List<CreditTv> tvs = new ArrayList<>();
-                        PersonTvCredits tvCredits = response.body();
+                        PersonTvCredit tvCredits = response.body();
 
                         View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
                         View crew = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
@@ -104,11 +107,16 @@ public class ActorInfoFragment extends Fragment {
                         if (tvCredits.getCrew().size() != 0 && tvCredits.getCrew() != null) {
                             linearLayout.addView(crew);
                         }
+
+                        if (loader.getVisibility() == View.VISIBLE){
+                            loader.removeAllViewsInLayout();
+                            loader.setVisibility(View.GONE);
+                        }
                     }
                 }
 
                 @Override
-                public void onFailure(Call<PersonTvCredits> call, Throwable t) {
+                public void onFailure(Call<PersonTvCredit> call, Throwable t) {
 
                 }
             });
@@ -151,6 +159,11 @@ public class ActorInfoFragment extends Fragment {
                         if (movieCredits.getCrew().size() != 0 && movieCredits.getCrew() != null) {
                             linearLayout.addView(crew);
                         }
+
+                        if (loader.getVisibility() == View.VISIBLE){
+                            loader.removeAllViewsInLayout();
+                            loader.setVisibility(View.GONE);
+                        }
                     }
                 }
 
@@ -178,6 +191,11 @@ public class ActorInfoFragment extends Fragment {
                         Glide.with(getContext())
                                 .load(Constants.POSTER_SRC + person.getProfile_path())
                                 .into(picture);
+
+                        if (loader.getVisibility() == View.VISIBLE){
+                            loader.removeAllViewsInLayout();
+                            loader.setVisibility(View.GONE);
+                        }
                     }
                 }
 

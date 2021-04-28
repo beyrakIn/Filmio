@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,10 +32,12 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private Activity activity;
     private View root;
+    private RelativeLayout loader;
     private List<Movie> movies = new ArrayList<>();
     private RecyclerView recyclerView;
     private int pageCount = 1;
     private UpcomingAdapter adapter;
+    private GetMovies getMovies = new GetMovies();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,9 +47,10 @@ public class HomeFragment extends Fragment {
         activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         recyclerView = root.findViewById(R.id.upcoming_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        loader = root.findViewById(R.id.relative_loader);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());
+//        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         adapter = new UpcomingAdapter(getContext(), movies);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
@@ -73,7 +76,7 @@ public class HomeFragment extends Fragment {
     private void loadData(int page) {
         try {
             new Thread(() -> {
-                new GetMovies().getUpcomingMovies(page).enqueue(new Callback<MovieResponse>() {
+                getMovies.getUpcomingMovies(page).enqueue(new Callback<MovieResponse>() {
                     @Override
                     public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                         if (response.isSuccessful()) {
@@ -82,12 +85,16 @@ public class HomeFragment extends Fragment {
                             movies = movieResponse.getResults();
                             adapter.updateData(movies);
                             pageCount++;
+
+                            if (loader.getVisibility() == View.VISIBLE) {
+                                loader.removeAllViewsInLayout();
+                                loader.setVisibility(View.GONE);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<MovieResponse> call, Throwable t) {
-//                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(() -> {
                             loadData(pageCount);
                         }, 5000);
