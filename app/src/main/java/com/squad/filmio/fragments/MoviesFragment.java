@@ -84,7 +84,7 @@ public class MoviesFragment extends Fragment {
                     public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                         if (response.isSuccessful()) {
                             assert response.body() != null;
-                            movies = response.body().getResults();
+                            movies.addAll(response.body().getResults());
                             adapter.updateData(movies);
                             pageCount++;
 
@@ -97,7 +97,6 @@ public class MoviesFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<MovieResponse> call, Throwable t) {
-//                        Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(() -> {
                             loadData(pageCount);
                         }, 10000);
@@ -165,4 +164,9 @@ public class MoviesFragment extends Fragment {
         }).start();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        movies.clear();
+    }
 }

@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
                         if (response.isSuccessful()) {
                             MovieResponse movieResponse = response.body();
                             assert movieResponse != null;
-                            movies = movieResponse.getResults();
+                            movies.addAll(movieResponse.getResults());
                             adapter.updateData(movies);
                             pageCount++;
 
@@ -104,5 +104,11 @@ public class HomeFragment extends Fragment {
         } catch (Exception e) {
             Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        movies.clear();
     }
 }

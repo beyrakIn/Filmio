@@ -76,7 +76,7 @@ public class TvFragment extends Fragment {
                     @Override
                     public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
                         if (response.isSuccessful()) {
-                            tvs = response.body().getResults();
+                            tvs.addAll(response.body().getResults());
                             adapter.updateData(tvs);
                             pageCount++;
 
@@ -98,5 +98,11 @@ public class TvFragment extends Fragment {
         } catch (Exception e) {
             Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        tvs.clear();
     }
 }

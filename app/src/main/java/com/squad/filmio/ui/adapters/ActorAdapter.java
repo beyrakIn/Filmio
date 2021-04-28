@@ -42,6 +42,7 @@ public class ActorAdapter extends RecyclerView.Adapter<PersonItem> {
         holder.name.setText(person.getName());
         Glide.with(holder.itemView.getContext())
                 .load(Constants.POSTER_SRC + person.getProfile_path())
+                .error(R.drawable.ic_user)
                 .into(holder.picture);
 
         holder.itemView.setOnClickListener(v -> {
@@ -57,7 +58,8 @@ public class ActorAdapter extends RecyclerView.Adapter<PersonItem> {
     }
 
     public void updateData(List<Person> people) {
-        this.people.addAll(people);
+//        this.people.addAll(people);
+        this.people = people;
         notifyDataSetChanged();
     }
 }

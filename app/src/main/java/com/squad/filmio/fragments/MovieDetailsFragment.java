@@ -128,6 +128,7 @@ public class MovieDetailsFragment extends Fragment {
 
                             RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
                             castRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                            castRecyclerView.setNestedScrollingEnabled(false);
                             ActorAdapter actorAdapter = new ActorAdapter(getContext(),
                                     movieCredit.getCast(),
                                     R.id.action_movieDetailsFragment_to_actorInfoFragment);
@@ -202,6 +203,8 @@ public class MovieDetailsFragment extends Fragment {
                             castTitle.setText("ACTORS");
 
                             RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                            castRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+                            castRecyclerView.setNestedScrollingEnabled(false);
                             ActorAdapter actorAdapter = new ActorAdapter(getContext(),
                                     movieCredit.getCast(),
                                     R.id.action_movieDetailsFragment_to_actorInfoFragment);

@@ -2,7 +2,6 @@ package com.squad.filmio.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -79,11 +78,11 @@ public class ActorsFragment extends Fragment {
                     @Override
                     public void onResponse(Call<PersonResponse> call, Response<PersonResponse> response) {
                         if (response.isSuccessful()) {
-                            people = response.body().getResults();
+                            people.addAll(response.body().getResults());
                             adapter.updateData(people);
                             pageCount++;
 
-                            if (loader.getVisibility() == View.VISIBLE){
+                            if (loader.getVisibility() == View.VISIBLE) {
                                 loader.removeAllViewsInLayout();
                                 loader.setVisibility(View.GONE);
                             }
@@ -101,5 +100,11 @@ public class ActorsFragment extends Fragment {
         } catch (Exception e) {
             Toast.makeText(getContext(), e.getCause().getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        people.clear();
     }
 }

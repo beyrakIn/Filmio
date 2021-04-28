@@ -3,6 +3,7 @@ package com.squad.filmio.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class ActorInfoFragment extends Fragment {
     private RelativeLayout loader;
     private ImageView picture;
     private TextView actorName, placeOfBirth, popularity, birthday, biography, knownForDepartment;
-    private int id;
+    private int personId;
     private GetPeople getPeople = new GetPeople();
 
 
@@ -64,10 +65,11 @@ public class ActorInfoFragment extends Fragment {
         biography = root.findViewById(R.id.actor_info_biography);
 
         Bundle args = getArguments();
-        id = args.getInt("actorId", 0);
-        getMovieCredits(id);
-        getTvCredits(id);
-        loadData(id);
+        assert args != null;
+        personId = args.getInt("actorId", 0);
+        loadData(personId);
+        getMovieCredits(personId);
+        getTvCredits(personId);
         return root;
     }
 
@@ -108,10 +110,10 @@ public class ActorInfoFragment extends Fragment {
                             linearLayout.addView(crew);
                         }
 
-                        if (loader.getVisibility() == View.VISIBLE){
-                            loader.removeAllViewsInLayout();
-                            loader.setVisibility(View.GONE);
-                        }
+//                        if (loader.getVisibility() == View.VISIBLE){
+//                            loader.removeAllViewsInLayout();
+//                            loader.setVisibility(View.GONE);
+//                        }
                     }
                 }
 
@@ -160,10 +162,10 @@ public class ActorInfoFragment extends Fragment {
                             linearLayout.addView(crew);
                         }
 
-                        if (loader.getVisibility() == View.VISIBLE){
-                            loader.removeAllViewsInLayout();
-                            loader.setVisibility(View.GONE);
-                        }
+//                        if (loader.getVisibility() == View.VISIBLE){
+//                            loader.removeAllViewsInLayout();
+//                            loader.setVisibility(View.GONE);
+//                        }
                     }
                 }
 
@@ -192,7 +194,7 @@ public class ActorInfoFragment extends Fragment {
                                 .load(Constants.POSTER_SRC + person.getProfile_path())
                                 .into(picture);
 
-                        if (loader.getVisibility() == View.VISIBLE){
+                        if (loader.getVisibility() == View.VISIBLE) {
                             loader.removeAllViewsInLayout();
                             loader.setVisibility(View.GONE);
                         }
@@ -201,27 +203,11 @@ public class ActorInfoFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<Person> call, Throwable t) {
-
+                    new Handler().postDelayed(() -> {
+                        loadData(personId);
+                    }, 5000);
                 }
             });
         }).start();
     }
-
-//    @Override
-//    public void onDestroy() {
-//        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        super.onDestroy();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        activity.getWindow().clearFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        super.onPause();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        activity.getWindow().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        super.onResume();
-//    }
 }

@@ -56,7 +56,8 @@ public class TvAdapter extends RecyclerView.Adapter<SimpleItem> {
     }
 
     public void updateData(List<Tv> tvs) {
-        this.tvs.addAll(tvs);
+//        this.tvs.addAll(tvs);
+        this.tvs = tvs;
         notifyDataSetChanged();
     }
 }

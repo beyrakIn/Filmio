@@ -79,7 +79,8 @@ public class UpcomingAdapter extends RecyclerView.Adapter<VerticalItem> {
     }
 
     public void updateData(List<Movie> movies) {
-        this.movies.addAll(movies);
+//        this.movies.addAll(movies);
+        this.movies = movies;
         notifyDataSetChanged();
     }
 }
