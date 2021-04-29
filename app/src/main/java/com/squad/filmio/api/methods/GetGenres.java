@@ -11,24 +11,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GetGenres {
-    AppService appService;
-
+    private final AppService appService = Config.retrofit.create(AppService.class);;
     private final String KEY = Constants.API_KEY;
     private final String LANG = Constants.LANG;
 
     public Call<GenreResponse> getMoviesGenres() {
-        appService = Config.retrofit.create(AppService.class);
         return appService.GET_MOVIE_GENRES(KEY, LANG, LANG);
     }
 
     public Call<GenreResponse> getTvGenres() {
-        appService = Config.retrofit.create(AppService.class);
         return appService.GET_TV_GENRES(KEY, LANG, LANG);
     }
 
 
     public Call<Genre> getMoviesGenre(int id) {
-        appService = Config.retrofit.create(AppService.class);
         return appService.GET_MOVIE_GENRE(id, KEY, LANG, LANG);
     }
 
