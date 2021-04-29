@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetTv;
-import com.squad.filmio.api.models.tv.Tv;
+import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.api.models.tv.TvResponse;
-import com.squad.filmio.ui.adapters.TvAdapter;
+import com.squad.filmio.ui.adapters.FilmAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,8 @@ public class TvFragment extends Fragment {
     private Activity activity;
     private RelativeLayout loader;
     private RecyclerView recyclerView;
-    private TvAdapter adapter;
-    private List<Tv> tvs = new ArrayList<>();
+    private FilmAdapter adapter;
+    private List<Film> tvs = new ArrayList<>();
     private int pageCount = 1;
 
 
@@ -46,7 +46,9 @@ public class TvFragment extends Fragment {
 
         loader = root.findViewById(R.id.relative_loader);
         recyclerView = root.findViewById(R.id.fragment_tv_recycler);
-        adapter = new TvAdapter(getContext(), tvs);
+        adapter = new FilmAdapter(getContext(), tvs,
+                R.id.action_navigation_tv_to_movieDetailsFragment,
+                false);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);

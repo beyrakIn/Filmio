@@ -1,41 +1,40 @@
 package com.squad.filmio.api.models.person;
 
+import com.squad.filmio.api.models.movie.Film;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonMovieCredits implements Serializable {
-    List<CreditMovie> cast = new ArrayList<>();
-    List<CreditMovie> crew = new ArrayList<>();
+    List<Film> cast = new ArrayList<>();
+    List<Film> crew = new ArrayList<>();
     private int id;
 
 
-    // Getter Methods
+    public List<Film> getCast() {
+        return cast;
+    }
+
+    public void setCast(List<Film> cast) {
+        this.cast = cast;
+    }
+
+    public List<Film> getCrew() {
+        return crew;
+    }
+
+    public void setCrew(List<Film> crew) {
+        this.crew = crew;
+    }
 
     public int getId() {
         return id;
     }
 
-    // Setter Methods
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<CreditMovie> getCast() {
-        return cast;
-    }
-
-    public void setCast(List<CreditMovie> cast) {
-        this.cast = cast;
-    }
-
-    public List<CreditMovie> getCrew() {
-        return crew;
-    }
-
-    public void setCrew(List<CreditMovie> crew) {
-        this.crew = crew;
     }
 
     @Override

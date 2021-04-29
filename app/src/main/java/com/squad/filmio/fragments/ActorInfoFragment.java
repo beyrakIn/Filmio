@@ -20,13 +20,11 @@ import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetPeople;
-import com.squad.filmio.api.models.person.CreditMovie;
-import com.squad.filmio.api.models.person.CreditTv;
+import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.api.models.person.Person;
 import com.squad.filmio.api.models.person.PersonMovieCredits;
 import com.squad.filmio.api.models.person.PersonTvCredit;
-import com.squad.filmio.ui.adapters.MovieCreditAdapter;
-import com.squad.filmio.ui.adapters.TvCreditAdapter;
+import com.squad.filmio.ui.adapters.FilmAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ public class ActorInfoFragment extends Fragment {
     private ImageView picture;
     private TextView actorName, placeOfBirth, popularity, birthday, biography, knownForDepartment;
     private int personId;
-    private GetPeople getPeople = new GetPeople();
+    private final GetPeople getPeople = new GetPeople();
 
 
     @Override
@@ -79,7 +77,7 @@ public class ActorInfoFragment extends Fragment {
                 @Override
                 public void onResponse(Call<PersonTvCredit> call, Response<PersonTvCredit> response) {
                     if (response.isSuccessful()) {
-                        List<CreditTv> tvs = new ArrayList<>();
+                        List<Film> tvs = new ArrayList<>();
                         PersonTvCredit tvCredits = response.body();
 
                         View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
@@ -88,18 +86,21 @@ public class ActorInfoFragment extends Fragment {
                         TextView castTitle = cast.findViewById(R.id.group_title);
                         TextView crewTitle = crew.findViewById(R.id.group_title);
 
-                        castTitle.setText("CAST");
-                        crewTitle.setText("CREW");
+                        castTitle.setText("TV SHOWS");
+                        crewTitle.setText("TV SHOWS");
 
                         RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
                         RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
 
-                        TvCreditAdapter castAdapter = new TvCreditAdapter(getContext(), tvs);
-                        TvCreditAdapter crewAdapter = new TvCreditAdapter(getContext(), tvs);
+                        FilmAdapter castAdapter = new FilmAdapter(getContext(), tvs,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
+                        FilmAdapter crewAdapter = new FilmAdapter(getContext(), tvs,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
 
                         castRecyclerView.setAdapter(castAdapter);
                         crewRecyclerView.setAdapter(crewAdapter);
 
+//                        Film casts = (Film) tvCredits.getCast();
                         castAdapter.updateData(tvCredits.getCast());
                         crewAdapter.updateData(tvCredits.getCrew());
 
@@ -131,7 +132,7 @@ public class ActorInfoFragment extends Fragment {
                 @Override
                 public void onResponse(Call<PersonMovieCredits> call, Response<PersonMovieCredits> response) {
                     if (response.isSuccessful()) {
-                        List<CreditMovie> movies = new ArrayList<>();
+                        List<Film> movies = new ArrayList<>();
                         PersonMovieCredits movieCredits = response.body();
 
                         View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
@@ -140,14 +141,17 @@ public class ActorInfoFragment extends Fragment {
                         TextView castTitle = cast.findViewById(R.id.group_title);
                         TextView crewTitle = crew.findViewById(R.id.group_title);
 
-                        castTitle.setText("CAST");
-                        crewTitle.setText("CREW");
+                        castTitle.setText("MOVIES");
+                        crewTitle.setText("MOVIES");
 
                         RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
                         RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
 
-                        MovieCreditAdapter castAdapter = new MovieCreditAdapter(getContext(), movies);
-                        MovieCreditAdapter crewAdapter = new MovieCreditAdapter(getContext(), movies);
+                        FilmAdapter castAdapter = new FilmAdapter(getContext(), movies,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, true);
+                        FilmAdapter crewAdapter = new FilmAdapter(getContext(), movies,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, true);
+
 
                         castRecyclerView.setAdapter(castAdapter);
                         crewRecyclerView.setAdapter(crewAdapter);

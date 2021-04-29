@@ -24,6 +24,7 @@ import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.methods.GetTv;
 import com.squad.filmio.api.models.genre.Genre;
+import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.tv.Tv;
@@ -92,7 +93,8 @@ public class MovieDetailsFragment extends Fragment {
                                     .load(Constants.POSTER_SRC + tv.getPoster_path())
                                     .into(poster);
 
-                            title.setText(tv.getName());
+
+                            title.setText(response.body().getName());
                             for (Genre genre : tv.getGenres()) {
                                 genres.setText(genres.getText() + genre.getName() + "/");
                             }

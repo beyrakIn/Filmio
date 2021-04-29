@@ -13,18 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
-import com.squad.filmio.api.models.person.CreditTv;
+import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.ui.views.SimpleItem;
 
 import java.util.List;
 
-public class TvCreditAdapter extends RecyclerView.Adapter<SimpleItem> {
+public class FilmAdapter extends RecyclerView.Adapter<SimpleItem> {
     private Context context;
-    private List<CreditTv> tvs;
+    private List<Film> films;
+    private int action;
+    private boolean isMovie;
 
-    public TvCreditAdapter(Context context, List<CreditTv> tvs) {
+    public FilmAdapter(Context context, List<Film> films, int action, boolean isMovie) {
         this.context = context;
-        this.tvs = tvs;
+        this.films = films;
+        this.action = action;
+        this.isMovie = isMovie;
     }
 
     @NonNull
@@ -36,25 +40,29 @@ public class TvCreditAdapter extends RecyclerView.Adapter<SimpleItem> {
 
     @Override
     public void onBindViewHolder(@NonNull SimpleItem holder, int position) {
-        CreditTv tv = tvs.get(position);
+        Film film = films.get(position);
         Glide.with(holder.itemView.getContext())
-                .load(Constants.POSTER_SRC + tv.getPoster_path())
+                .load(Constants.POSTER_SRC + film.getPoster_path())
                 .into(holder.picture);
 
+        Bundle args = new Bundle();
+        args.putInt(isMovie ? "movieId" : "tvId", film.getId());
+//        args.putInt("tvId", film.getId());
+
+
         holder.itemView.setOnClickListener(v -> {
-            Bundle args = new Bundle();
-            args.putInt("tvId", tv.getId());
-            Navigation.findNavController(v).navigate(R.id.action_actorInfoFragment_to_movieDetailsFragment, args);
+            Navigation.findNavController(v).navigate(action, args);
         });
     }
 
     @Override
     public int getItemCount() {
-        return tvs.size();
+        return films.size();
     }
 
-    public void updateData(List<CreditTv> tvs) {
-        this.tvs = tvs;
+    public void updateData(List<Film> films) {
+//        this.movies.addAll(movies);
+        this.films = films;
         notifyDataSetChanged();
     }
 }

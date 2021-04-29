@@ -19,10 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetMovies;
+import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.movie.MovieResponse;
 import com.squad.filmio.ui.adapters.CoverAdapter;
-import com.squad.filmio.ui.adapters.MovieAdapter;
+import com.squad.filmio.ui.adapters.FilmAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,9 @@ public class MoviesFragment extends Fragment {
     private ViewPager coverViewPager;
     private LinearLayout mainLinear;
     private RecyclerView popularRecyclerView;
-    private List<Movie> movies = new ArrayList<>();
+    private List<Film> movies = new ArrayList<>();
     private int pageCount = 1;
-    private MovieAdapter adapter;
+    private FilmAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,7 +54,9 @@ public class MoviesFragment extends Fragment {
         coverViewPager = root.findViewById(R.id.movies_fragment_view_pager);
         mainLinear = root.findViewById(R.id.movies_fragment_main_linear);
         popularRecyclerView = root.findViewById(R.id.fragment_movies_recycler);
-        adapter = new MovieAdapter(getContext(), movies);
+        adapter = new FilmAdapter(getContext(), movies,
+                R.id.action_navigation_movies_to_movieDetailsFragment,
+                true);
         popularRecyclerView.setAdapter(adapter);
         popularRecyclerView.setHasFixedSize(false);
         popularRecyclerView.setItemViewCacheSize(150);
@@ -88,7 +91,7 @@ public class MoviesFragment extends Fragment {
                             adapter.updateData(movies);
                             pageCount++;
 
-                            if (loader.getVisibility() == View.VISIBLE){
+                            if (loader.getVisibility() == View.VISIBLE) {
                                 loader.removeAllViewsInLayout();
                                 loader.setVisibility(View.GONE);
                             }
