@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         adapter = new UpcomingAdapter(getContext(), movies);
         recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);
 
         loadData(pageCount);

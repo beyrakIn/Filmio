@@ -172,7 +172,7 @@ public class ActorInfoFragment extends Fragment {
 
                         AdView adView = new AdView(getContext());
                         adView.setAdSize(AdSize.FULL_BANNER);
-                        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+                        adView.setAdUnitId(Constants.BANNER_ID);
                         AdRequest adRequest = new AdRequest.Builder().build();
                         adView.loadAd(adRequest);
                         linearLayout.addView(adView);

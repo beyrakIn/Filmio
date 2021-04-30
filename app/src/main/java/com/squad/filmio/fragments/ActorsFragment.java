@@ -49,7 +49,7 @@ public class ActorsFragment extends Fragment {
         loader = root.findViewById(R.id.fragment_actors_loader);
         adapter = new ActorAdapter(getContext(), people, R.id.action_navigation_actors_to_actorInfoFragment);
         recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);
 
         loadData(pageCount);

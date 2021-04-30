@@ -50,7 +50,7 @@ public class TvFragment extends Fragment {
                 R.id.action_navigation_tv_to_movieDetailsFragment,
                 false);
         recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(150);
 
 
