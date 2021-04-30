@@ -13,4 +13,7 @@
     <string name="tv_shows">TV Shows</string>
     <string name="actors">Actors</string>
     <string name="upcoming">Upcoming</string>
+    <string name="title_activity_splash_screen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

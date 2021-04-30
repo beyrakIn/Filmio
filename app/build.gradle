@@ -47,6 +47,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.github.nirhart:parallaxscroll:1.0'
 //    implementation 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5'
+    implementation 'com.airbnb.android:lottie:3.6.0'
+
 
     //Recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
