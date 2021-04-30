@@ -9,5 +9,6 @@ public class Constants {
     public static final String BACK_SRC = "https://www.themoviedb.org/t/p/w533_and_h300_bestv2";
     public static final String URL = "https://api.themoviedb.org/3/";
     public static final String LANG = locale.getLanguage();
+    public static final String BANNER_ID = "ca-app-pub-2248916584991987/8089083633";
 
 }

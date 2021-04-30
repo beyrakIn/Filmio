@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetMovies;
 import com.squad.filmio.api.methods.GetTv;
 import com.squad.filmio.api.models.genre.Genre;
-import com.squad.filmio.api.models.movie.Film;
 import com.squad.filmio.api.models.movie.Movie;
 import com.squad.filmio.api.models.movie.MovieCredit;
 import com.squad.filmio.api.models.tv.Tv;
@@ -102,7 +104,7 @@ public class MovieDetailsFragment extends Fragment {
                             releaseDate.setText(tv.getFirst_air_date());
 
 
-                            if (loader.getVisibility() == View.VISIBLE){
+                            if (loader.getVisibility() == View.VISIBLE) {
                                 loader.removeAllViewsInLayout();
                                 loader.setVisibility(View.GONE);
                             }
@@ -138,6 +140,13 @@ public class MovieDetailsFragment extends Fragment {
                             castRecyclerView.setAdapter(actorAdapter);
                             if (movieCredit.getCast().size() != 0 && movieCredit.getCast() != null) {
                                 linearLayout.addView(cast);
+
+                                AdView adView = new AdView(getContext());
+                                adView.setAdSize(AdSize.FULL_BANNER);
+                                adView.setAdUnitId(Constants.BANNER_ID);
+                                AdRequest adRequest = new AdRequest.Builder().build();
+                                adView.loadAd(adRequest);
+                                linearLayout.addView(adView);
                             }
                         }
                     }
@@ -179,7 +188,7 @@ public class MovieDetailsFragment extends Fragment {
                             runtime.setText(String.valueOf((int) movie.getRuntime()));
                             releaseDate.setText(movie.getRelease_date());
 
-                            if (loader.getVisibility() == View.VISIBLE){
+                            if (loader.getVisibility() == View.VISIBLE) {
                                 loader.removeAllViewsInLayout();
                                 loader.setVisibility(View.GONE);
                             }
@@ -214,6 +223,13 @@ public class MovieDetailsFragment extends Fragment {
 
                             if (movieCredit.getCast().size() != 0 && movieCredit.getCast() != null) {
                                 linearLayout.addView(cast);
+
+                                AdView adView = new AdView(getContext());
+                                adView.setAdSize(AdSize.FULL_BANNER);
+                                adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+                                AdRequest adRequest = new AdRequest.Builder().build();
+                                adView.loadAd(adRequest);
+                                linearLayout.addView(adView);
                             }
                         }
                     }

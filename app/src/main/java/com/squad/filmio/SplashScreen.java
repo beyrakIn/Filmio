@@ -1,14 +1,13 @@
 package com.squad.filmio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
     private final int TIME = 1000;
-    static int i = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +20,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void setSplash() {
         new Handler().postDelayed(() -> {
+            startActivity(new Intent(this, HomeActivity.class));
         }, TIME);
     }
 }

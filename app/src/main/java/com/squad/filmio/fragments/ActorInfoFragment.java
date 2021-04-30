@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.squad.filmio.Constants;
 import com.squad.filmio.R;
 import com.squad.filmio.api.methods.GetPeople;
@@ -71,61 +74,6 @@ public class ActorInfoFragment extends Fragment {
         return root;
     }
 
-    private void getTvCredits(int id) {
-        new Thread(() -> {
-            getPeople.getPersonTvCredits(id).enqueue(new Callback<PersonTvCredit>() {
-                @Override
-                public void onResponse(Call<PersonTvCredit> call, Response<PersonTvCredit> response) {
-                    if (response.isSuccessful()) {
-                        List<Film> tvs = new ArrayList<>();
-                        PersonTvCredit tvCredits = response.body();
-
-                        View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
-                        View crew = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
-
-                        TextView castTitle = cast.findViewById(R.id.group_title);
-                        TextView crewTitle = crew.findViewById(R.id.group_title);
-
-                        castTitle.setText("TV SHOWS");
-                        crewTitle.setText("TV SHOWS");
-
-                        RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
-                        RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
-
-                        FilmAdapter castAdapter = new FilmAdapter(getContext(), tvs,
-                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
-                        FilmAdapter crewAdapter = new FilmAdapter(getContext(), tvs,
-                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
-
-                        castRecyclerView.setAdapter(castAdapter);
-                        crewRecyclerView.setAdapter(crewAdapter);
-
-//                        Film casts = (Film) tvCredits.getCast();
-                        castAdapter.updateData(tvCredits.getCast());
-                        crewAdapter.updateData(tvCredits.getCrew());
-
-                        if (tvCredits.getCast().size() != 0 && tvCredits.getCast() != null) {
-                            linearLayout.addView(cast);
-                        }
-                        if (tvCredits.getCrew().size() != 0 && tvCredits.getCrew() != null) {
-                            linearLayout.addView(crew);
-                        }
-
-//                        if (loader.getVisibility() == View.VISIBLE){
-//                            loader.removeAllViewsInLayout();
-//                            loader.setVisibility(View.GONE);
-//                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<PersonTvCredit> call, Throwable t) {
-
-                }
-            });
-        }).start();
-    }
-
     private void getMovieCredits(int id) {
         new Thread(() -> {
             getPeople.getPersonMovieCredits(id).enqueue(new Callback<PersonMovieCredits>() {
@@ -175,6 +123,69 @@ public class ActorInfoFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<PersonMovieCredits> call, Throwable t) {
+
+                }
+            });
+        }).start();
+    }
+
+    private void getTvCredits(int id) {
+        new Thread(() -> {
+            getPeople.getPersonTvCredits(id).enqueue(new Callback<PersonTvCredit>() {
+                @Override
+                public void onResponse(Call<PersonTvCredit> call, Response<PersonTvCredit> response) {
+                    if (response.isSuccessful()) {
+                        List<Film> tvs = new ArrayList<>();
+                        PersonTvCredit tvCredits = response.body();
+
+                        View cast = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+                        View crew = LayoutInflater.from(root.getContext()).inflate(R.layout.group_item, null, false);
+
+                        TextView castTitle = cast.findViewById(R.id.group_title);
+                        TextView crewTitle = crew.findViewById(R.id.group_title);
+
+                        castTitle.setText("TV SHOWS");
+                        crewTitle.setText("TV SHOWS");
+
+                        RecyclerView castRecyclerView = cast.findViewById(R.id.group_recycler_view);
+                        RecyclerView crewRecyclerView = crew.findViewById(R.id.group_recycler_view);
+
+                        FilmAdapter castAdapter = new FilmAdapter(getContext(), tvs,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
+                        FilmAdapter crewAdapter = new FilmAdapter(getContext(), tvs,
+                                R.id.action_actorInfoFragment_to_movieDetailsFragment, false);
+
+                        castRecyclerView.setAdapter(castAdapter);
+                        crewRecyclerView.setAdapter(crewAdapter);
+
+//                        Film casts = (Film) tvCredits.getCast();
+                        castAdapter.updateData(tvCredits.getCast());
+                        crewAdapter.updateData(tvCredits.getCrew());
+
+                        if (tvCredits.getCast().size() != 0 && tvCredits.getCast() != null) {
+                            linearLayout.addView(cast);
+                        }
+                        if (tvCredits.getCrew().size() != 0 && tvCredits.getCrew() != null) {
+                            linearLayout.addView(crew);
+                        }
+
+
+                        AdView adView = new AdView(getContext());
+                        adView.setAdSize(AdSize.FULL_BANNER);
+                        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+                        AdRequest adRequest = new AdRequest.Builder().build();
+                        adView.loadAd(adRequest);
+                        linearLayout.addView(adView);
+
+//                        if (loader.getVisibility() == View.VISIBLE){
+//                            loader.removeAllViewsInLayout();
+//                            loader.setVisibility(View.GONE);
+//                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PersonTvCredit> call, Throwable t) {
 
                 }
             });
