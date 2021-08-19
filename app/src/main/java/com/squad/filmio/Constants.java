@@ -4,6 +4,7 @@ import java.util.Locale;
 
 public class Constants {
     public static Locale locale = Locale.getDefault();
+
     public static final String API_KEY = "";
     public static final String IMG_SRC = "https://image.tmdb.org/t/p/w500";
     public static final String POSTER_SRC = IMG_SRC;    //"https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
